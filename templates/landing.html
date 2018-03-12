@@ -1,8 +1,65 @@
 <html>
   <head>
     <title> Pocket Recipes </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+      <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
   </head>
   <body>
-    <h1> Welcome to Pocket Recipes! </h1>
+    <nav class="navbar navbar-light navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Pocket Recipes</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Browse Recipes</a></li>
+          <li><a href="#">Upload Creation</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id=body class="container">
+      <div id="header" class="jumbotron">
+        <img id="icon" src="{{ url_for('static', filename='icon_burned.png') }}"/>
+        <h1> Pocket Recipes </h1>
+      </div>
+      <div id="grid" class="container">
+        <!-- create div to display include ingredients -->
+        <div class="row">
+          <div class="col-xs-6">
+            <div id=search class="container">
+              <form class="form-inline active-green-4">
+                <input type="text" class="form-control" placeholder="Include Ingredients">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </form>
+            </div>
+            <br>
+            <!-- create div to display exclude ingredients -->
+            <div id=search class="container">
+              <form class="form-inline active-red-4">
+                <input type="text" class="form-control" placeholder="Exclude Ingredients">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </form>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <p>TODO: add layout for displaying recipes</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
