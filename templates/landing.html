@@ -40,26 +40,162 @@
         <!-- create div to display include ingredients -->
         <div class="row">
           <div class="col-xs-6">
-            <div id=search class="container">
-              <form class="form-inline active-green-4">
-                <input type="text" class="form-control" placeholder="Include Ingredients">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </form>
+            <!-- search row -->
+            <div class="panel panel-success">
+              <div class="panel-heading">Specify ingredients you want included in your queries: </div>
+              <div class="panel-body">
+                <div id=search class="container">
+                  <form class="form-inline active-green-4">
+                    <input type="text" class="form-control" placeholder="Include Ingredients">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </form>
+                </div>
+                <!-- dummy ingredient list -->
+                <div id=ingred-list class="container include">
+                  <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Dapibus ac facilisis in
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Morbi leo risus
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Porta ac consectetur ac
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Vestibulum at eros
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <br>
+            <!-- end of first panel -->
+
+            </br>
+
             <!-- create div to display exclude ingredients -->
-            <div id=search class="container">
-              <form class="form-inline active-red-4">
-                <input type="text" class="form-control" placeholder="Exclude Ingredients">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </form>
+            <div class="panel panel-danger">
+              <div class="panel-heading">Specify ingredients you want excluded in your queries: </div>
+              <div class="panel-body">
+                <div id=search class="container">
+                  <form class="form-inline active-red-4">
+                    <input type="text" class="form-control" placeholder="Exclude Ingredients">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </form>
+                </div>
+                <!-- dummy ingredient list -->
+                 <div id=ingred-list class="container exclude">
+                  <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Dapibus ac facilisis in
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Morbi leo risus
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Porta ac consectetur ac
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                    <li class="list-group-item">Vestibulum at eros
+                      <span class="remove">
+                        <span class="btn btn-sm btn-default" onclick="">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                      </span>
+                    </li>
+                  </ul>
+                  <br>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- end of second panel -->
+
           <div class="col-xs-6">
-            <p>TODO: add layout for displaying recipes</p>
+            <!-- start of recipe panels -->
+            <div class="panel panel-info recipes">
+              <!-- dummy individual panels -->
+              <div class="panel-heading">Card Title</div>
+              <img class="panel-img-top" src="https://i.imgur.com/0K4qGqY.jpg" alt="Card image cap">
+              <div class="panel-body">
+                <h2 class="panel-title">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </h2>
+                <p class="panel-text">Description of recipe, etc.etc.etc...</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+
+            <div class="panel panel-info recipes">
+              <!-- dummy individual panels -->
+              <div class="panel-heading">Card Title</div>
+              <img class="panel-img-top" src="https://i.imgur.com/0K4qGqY.jpg" alt="Card image cap">
+              <div class="panel-body">
+                <h2 class="panel-title">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </h2>
+                <p class="panel-text">Description of recipe, etc.etc.etc...</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+              <!-- end of dummy data -->
+            </div>
+            
           </div>
+
         </div>
+        <!-- end of row -->
       </div>
+      <!-- end of grid -->
     </div>
+
   </body>
 </html>
