@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title> Pocket Recipes </title>
@@ -14,9 +15,34 @@
 
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var header = $('#header-img');
+        var backgrounds = new Array(
+          'static/background3.jpg',
+          'static/background2.jpg',
+          'static/background.jpg'
+        );
+
+        var current = 0;
+
+        function nextBackground() {
+            current++;
+            current = current % backgrounds.length;
+            header.css('background', 'linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url(' + backgrounds[current] + ')');
+            header.css('background-repeat', 'no-repeat');
+            header.css('background-size', '100%');
+        }
+        setInterval(nextBackground, 6000);
+
+        // header.css('background', backgrounds[0]);
+      });
+    </script>
   </head>
+
   <body>
-    <nav class="navbar navbar-light navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Pocket Recipes</a>
@@ -31,27 +57,37 @@
         </ul>
       </div>
     </nav>
-    <div id=body class="container">
-      <div id="header" class="jumbotron">
-        <img id="icon" src="{{ url_for('static', filename='icon_burned.png') }}"/>
-        <h1> Pocket Recipes </h1>
+    <div id=body>
+      <div id="header-img" class="jumbotron">
+        <div id="title">
+          <img id="icon" src="{{ url_for('static', filename='icon_burned.png') }}" alt="Card image cap"/>
+          <h1> Pocket Recipes </h1>
+        </div>
       </div>
+      <!-- end header section -->
+
+      <div id="about" class="jumbotron">
+        <p>Find recipes that are right for your fridge</p>
+      </div>
+      <!-- end about section -->
+
       <div id="grid" class="container">
         <!-- create div to display include ingredients -->
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <!-- search row -->
             <div class="panel panel-success">
               <div class="panel-heading">Specify ingredients you want included in your queries: </div>
               <div class="panel-body">
-                <div id=search>
+                <div class=search>
                   <form class="form-inline active-green-4">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <input type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
                   </form>
                 </div>
+                <br>
                 <!-- dummy ingredient list -->
-                <div id=ingred-list class="container include">
+                <div class="container ingred-list include">
                   <ul class="list-group">
                     <li class="list-group-item">Cras justo odio
                       <span class="remove">
@@ -93,21 +129,20 @@
               </div>
             </div>
             <!-- end of first panel -->
-
-            </br>
-
+            <br>
             <!-- create div to display exclude ingredients -->
             <div class="panel panel-danger">
               <div class="panel-heading">Specify ingredients you want excluded in your queries: </div>
               <div class="panel-body">
-                <div id=search>
+                <div class=search>
                   <form class="form-inline active-red-4">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <input type="text" class="form-control" placeholder="Exclude Ingredients" style="width: 90%">
                   </form>
                 </div>
+                <br>
                 <!-- dummy ingredient list -->
-                 <div id=ingred-list class="container exclude">
+                 <div class="container ingred-list exclude">
                   <ul class="list-group">
                     <li class="list-group-item">Cras justo odio
                       <span class="remove">
@@ -148,8 +183,8 @@
                 </div>
               </div>
             </div>
+            <!-- end of second panel -->
           </div>
-          <!-- end of second panel -->
 
           <div class="col-sm-4">
             <!-- start of recipe panels -->
@@ -236,7 +271,7 @@
     </div>
 
     <footer class="navbar-default">
-      <div class="container footer">
+      <div class="footer">
         <div class="row">
           <h3><i class="fa fa-facebook"></i>  <i class="fa fa-twitter"></i> <i class="fa fa-envelope"></i> </h3>
           <p>PocketRecipes&#169;</p>
