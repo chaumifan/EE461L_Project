@@ -52,8 +52,13 @@
           <li><a href="#">Upload Creation</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% if user %}
+            <li><a><span class="glyphicon glyphicon-user"></span> Welcome, {{ user.nickname() }}! </a></li>
+            <li><a href="{{ logout_url() }}"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+          {% else %}
+            <li><a><span class="glyphicon glyphicon-user"></span> Welcome, guest! </a></li>
+            <li><a href="{{ login_url() }}"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
