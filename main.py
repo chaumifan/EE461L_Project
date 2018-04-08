@@ -3,10 +3,13 @@ from google.appengine.api import users
 
 app = Flask(__name__)
 
+global query_list
+
 @app.route('/', methods=['GET'])
 def landing():
-  user = users.get_current_user()
-  return render_template('landing.html', user=user)
+	query_list = set()
+  	user = users.get_current_user()
+  	return render_template('landing.html', user=user)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -31,16 +34,16 @@ def submit_query(list):
 	recipes = set()
 	cursor = connect_db()
 	for ingred in list:
-	query = “SELECT * “ + ingred + “FROM db”
-	cursor.execute(query)
-	recipes.add(list(cursor.fetchall()))
-	return render_template(‘landing.html’, res=list(recipes))
+		query = "SELECT * " + ingred + "FROM db"
+		cursor.execute(query)
+		recipes.add(list(cursor.fetchall()))
+	return render_template('landing.html', res=list(recipes))
 
 @app.route('/add_ingredient', methods=['POST']) 
-	def add_ingredient():
-		_ingredient = request.form['ingredient']
+def add_ingredient():
+	_ingredient = request.form['ingredient']
 	query_list.add(_ingredient) if _ingredient else {} #TODO add error page
 
 @app.route('/submit_query', methods=['POST'])
-	def submit_query():
-		submit_query(query_list) if query_list and len(query_list) > 0 else {} #TODO error page 
+def submit_query():
+	submit_query(query_list) if query_list and len(query_list) > 0 else {} #TODO error page 
