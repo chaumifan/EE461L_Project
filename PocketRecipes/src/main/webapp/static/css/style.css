@@ -1,0 +1,134 @@
+.navbar {
+	width: 100%;
+	/*background-color: #e3f2fd; */
+	margin: auto;
+}
+#icon {
+	width: 75px;
+	height: 75px;
+}
+#body {
+	width: 100%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#title {
+	margin-top: 270px
+}
+
+#about {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	background-color: #131712;
+	color: grey;
+	height: 100px;
+	padding-top: 0px;
+	font-style: italic;
+}
+
+.container .jumbotron {
+	border-radius: 0px;
+}
+
+#header-img {
+	width: 80%;
+	height: 500px;
+	margin: auto;
+    background: linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url('../background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+	text-align: center;
+	color:white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.active-green-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid olivedrab;
+    box-shadow: 0 0 0 1px olivedrab;
+}
+.active-green-3 input[type=text] {
+    border: 1px solid olivedrab;
+    box-shadow: 0 0 0 1px olivedrab;
+}
+.active-green-3 .fa, .active-green-4 .fa {
+    color: olivedrab;
+    font-size: 20px;
+}
+.active-red-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid darkred;
+    box-shadow: 0 0 0 1px darkred;
+}
+.active-red-3 input[type=text] {
+    border: 1px solid darkred;
+    box-shadow: 0 0 0 1px darkred;
+}
+.active-red-3 .fa, .active-red-4 .fa {
+    color: darkred;
+    font-size: 20px;
+}
+#grid {
+	width: 80%;
+	margin-top: 75px;
+}
+.ingred-list {
+	width: 100%;
+	margin-left: 0px;
+}
+.remove {
+	float: right;
+}
+.remove .btn {
+	border: 0px solid transparent;
+}
+
+.include .list-group-item {
+	overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+	border-color: olivedrab;
+}
+
+.exclude .list-group-item {
+	overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+	border-color: darkred;
+}
+
+.panel {
+	width: 80%
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.panel-img-top {
+	width: 100%;
+}
+
+.recipes .panel-heading {
+	text-align: center;
+	font-size: 16px;
+}
+
+.checked {
+    color: gold;
+}
+
+.recipes .panel-title {
+	text-align: center;
+}
+
+.recipes .btn {
+	float: right;
+}
+
+.footer {
+	margin-top: 75px;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
