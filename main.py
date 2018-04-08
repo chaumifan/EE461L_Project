@@ -1,48 +1,46 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, request, redirect
+from google.appengine.api import users
 
 app = Flask(__name__)
 
-global query_list
-
-@app.route('/')
+@app.route('/', methods=['GET'])
 def landing():
-	query_list = set()
-  	return render_template('landing.html')
+  user = users.get_current_user()
+  return render_template('landing.html', user=user)
 
-@app.route('/signUp')
-def signUp():
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+	user = users.get_current_user()
+	if request.method == 'POST':
+		# add the recipe to database
+		pass
+	else:
+		if not user:
+			return redirect(users.create_login_url(request.url))
+		return render_template('create.html', user=user)
 
-@app.route('/signUp', methods=['POST'])
-def signUp():
-	_name = request.form['inputName']
-    _email = request.form['inputEmail']
-    _password = request.form['inputPassword']
-    if _name and _email and _password:
-        return json.dumps({'html':'<span>All fields good !!</span>'})
-    else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
+@app.context_processor
+def utility_processor():
+	def login_url():
+		return users.create_login_url(request.url)
+	def logout_url():
+		return users.create_logout_url('/')
+	return {'login_url': login_url, 'logout_url': logout_url}
 
-@app.route('/submit_query')
-def submit_query(list):
+def submit_query(list): 
 	recipes = set()
 	cursor = connect_db()
 	for ingred in list:
-		query = “SELECT * “ + ingred + “FROM db”
-		cursor.execute(query)
-		recipes.add(list(cursor.fetchall()))
+	query = “SELECT * “ + ingred + “FROM db”
+	cursor.execute(query)
+	recipes.add(list(cursor.fetchall()))
 	return render_template(‘landing.html’, res=list(recipes))
 
-@app.route('/add_ingredient', methods=['POST'])
-def add_ingredient():
-	_ingredient = request.form['ingredient']
-    if _ingredient:
-        query_list.add(_ingredient)
-    else:
-    	# TODO: add error page
+@app.route('/add_ingredient', methods=['POST']) 
+	def add_ingredient():
+		_ingredient = request.form['ingredient']
+	query_list.add(_ingredient) if _ingredient else {} #TODO add error page
 
 @app.route('/submit_query', methods=['POST'])
-def submit_query():
-	if query_list and len(query_list) > 0:
-		submit_query(query_list)
-	else:
-    	# TODO: add error page
+	def submit_query():
+		submit_query(query_list) if query_list and len(query_list) > 0 else {} #TODO error page 
