@@ -106,50 +106,30 @@
               <div class="panel-heading">Specify ingredients you want included in your queries: </div>
               <div class="panel-body">
                 <div class=search>
-                  <form class="form-inline active-green-4">
+                  <form class="form-inline active-green-4" action ="/add_servlet" method="post">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    <input type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
+                    <input type="text" class="form-control" placeholder="Include Ingredients" 
+                    	id="ingred" name="ingred" style="width: 90%">
                   </form>
                 </div>
                 <br>
                 <!-- dummy ingredient list -->
                 <div class="container ingred-list include">
                   <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio
-                      <span class="remove">
-                        <span class="btn btn-sm btn-default" onclick="">
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </span>
-                      </span>
-                    </li>
-                    <li class="list-group-item">Dapibus ac facilisis in
-                      <span class="remove">
-                        <span class="btn btn-sm btn-default" onclick="">
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </span>
-                      </span>
-                    </li>
-                    <li class="list-group-item">Morbi leo risus
-                      <span class="remove">
-                        <span class="btn btn-sm btn-default" onclick="">
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </span>
-                      </span>
-                    </li>
-                    <li class="list-group-item">Porta ac consectetur ac
-                      <span class="remove">
-                        <span class="btn btn-sm btn-default" onclick="">
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </span>
-                      </span>
-                    </li>
-                    <li class="list-group-item">Vestibulum at eros
-                      <span class="remove">
-                        <span class="btn btn-sm btn-default" onclick="">
-                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </span>
-                      </span>
-                    </li>
+                  	<%
+                  	String[] arr = (String[]) request.getAttribute("ingred_list");
+                  	if (arr != null) {
+                  	  for (int i = 0; i < arr.length; i++) {
+                  	  %>
+	                    <li class="list-group-item">HELLO
+	                      <span class="remove">
+	                        <span class="btn btn-sm btn-default" onclick="">
+	                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+	                        </span>
+	                      </span>
+	                    </li>
+	                  <%}
+	                }%>
                   </ul>
                 </div>
               </div>
