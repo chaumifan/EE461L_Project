@@ -11,6 +11,7 @@ def create_recipe(name, instructions, image_link, ingred_list):
 	recipe.put()
 	for ingred in ingred_list:
 		pass
+		# TODO
 		# If ingredient is in datastore
 			# grab it and then update the ingred_list
 		# Else
@@ -29,7 +30,12 @@ def query_ingredients(ingred_list, exclude_list):
 	for e in exclude_results:
 		recipes.difference_update(e.recipe_list)
 
-	# Loop through the resulting recipes, query the databse for these entries, return the lsit of results
+	# Loop through the resulting recipes, query the database for these entries, return the list of results
+	ret = []
+	for r in recipes:
+		key = ndb.Key(Recipe, r)
+		ret.append(key.get())
+	return ret
 
 def save_ingredients_to_user(user, ingred_list):
 	pass
