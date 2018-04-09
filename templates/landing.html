@@ -52,7 +52,7 @@
         <div class="panel-heading">Specify ingredients you want included in your queries: </div>
         <div class="panel-body">
           <div class=search>
-            <form class="form-inline active-green-4">
+            <form class="form-inline active-green-4" method="post">
               <i class="fa fa-search" aria-hidden="true"></i>
               <input id="ingredient" type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
             </form>
@@ -65,7 +65,7 @@
               <p> hello <p>
               {% endif %}
               {% for ingred in arr %}
-              <li class="list-group-item">{{ingred.ingredient}}
+              <li class="list-group-item">{{ingred}}
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -84,7 +84,7 @@
         <div class="panel-heading">Specify ingredients you want excluded in your queries: </div>
         <div class="panel-body">
           <div class=search>
-            <form class="form-inline active-red-4">
+            <form class="form-inline active-red-4" method="post">
               <i class="fa fa-search" aria-hidden="true"></i>
               <input type="text" class="form-control" placeholder="Exclude Ingredients" style="width: 90%">
             </form>
