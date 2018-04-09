@@ -54,48 +54,25 @@
           <div class=search>
             <form class="form-inline active-green-4">
               <i class="fa fa-search" aria-hidden="true"></i>
-              <input type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
+              <input id="ingredient" type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
             </form>
           </div>
           <br>
           <!-- dummy ingredient list -->
           <div class="container ingred-list include">
             <ul class="list-group">
-              <li class="list-group-item">Cras justo odio
+              {% if not arr %}
+              <p> hello <p>
+              {% endif %}
+              {% for ingred in arr %}
+              <li class="list-group-item">{{ingred.ingredient}}
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </span>
                 </span>
               </li>
-              <li class="list-group-item">Dapibus ac facilisis in
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Morbi leo risus
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Porta ac consectetur ac
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Vestibulum at eros
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -117,27 +94,6 @@
            <div class="container ingred-list exclude">
             <ul class="list-group">
               <li class="list-group-item">Cras justo odio
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Dapibus ac facilisis in
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Morbi leo risus
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Porta ac consectetur ac
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
