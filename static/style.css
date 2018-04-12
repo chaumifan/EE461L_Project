@@ -37,38 +37,14 @@
 	width: 80%;
 	height: 500px;
 	margin: auto;
-    background: linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
+  background: linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
 	text-align: center;
 	color:white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.active-green-4 input[type=text]:focus:not([readonly]) {
-    border: 1px solid olivedrab;
-    box-shadow: 0 0 0 1px olivedrab;
-}
-.active-green-3 input[type=text] {
-    border: 1px solid olivedrab;
-    box-shadow: 0 0 0 1px olivedrab;
-}
-.active-green-3 .fa, .active-green-4 .fa {
-    color: olivedrab;
-    font-size: 20px;
-}
-.active-red-4 input[type=text]:focus:not([readonly]) {
-    border: 1px solid darkred;
-    box-shadow: 0 0 0 1px darkred;
-}
-.active-red-3 input[type=text] {
-    border: 1px solid darkred;
-    box-shadow: 0 0 0 1px darkred;
-}
-.active-red-3 .fa, .active-red-4 .fa {
-    color: darkred;
-    font-size: 20px;
-}
 #grid {
 	width: 80%;
 	margin-top: 75px;
@@ -85,17 +61,25 @@
 }
 
 .include .list-group-item {
+	height: 35px;
+	font-size: 17px;
 	overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-	border-color: olivedrab;
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  border: none;
+	box-shadow: 0 4px 2px -2px darkolivegreen; /*green*/
+	margin-bottom: 5px;
 }
 
 .exclude .list-group-item {
+	height: 35px;
+	font-size: 17px;
 	overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-	border-color: darkred;
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  border: none;
+	box-shadow: 0 4px 2px -2px darkred; /*green*/
+	margin-bottom: 5px;
 }
 
 .panel {
@@ -127,8 +111,36 @@
 
 .footer {
 	margin-top: 75px;
-    height: 100px;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
+  height: 100px;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+html, body {
+  background-color: #F1F1F1;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.panel-default {
+	border: none;
+}
+
+input[type=text] {
+	font-size: 20px;
+	text-align: center;
+  height: 30px;
+  border: 0;
+  width: 100%;
+  box-shadow: -0 4px 2px -2px #ebebeb; /*default grey*/
+  -webkit-transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+}
+input[type=text]:focus {
+  outline: none;
+  box-shadow: 0 4px 2px -2px grey;
 }

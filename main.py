@@ -31,15 +31,6 @@ def submit_query():
 	recipes = db.query_ingredients(ingred_list, exclude_list)
 	return render_template('recipes.html', res=recipes)
 
-@app.route('/', methods=['POST'])
-def add_ingred():
-	# ingred = request.form['ingredient']
-	# ingred_list = request.form.getlist('ingredients[]')
-	query_set = set()
-	query_set.add('bye')
-	return render_template('landing.html', arr=list(query_set))
-	
-
 @app.context_processor
 def utility_processor():
 	def login_url():

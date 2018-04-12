@@ -46,33 +46,33 @@
 <div id="grid" class="container">
   <!-- create div to display include ingredients -->
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <!-- search row -->
-      <div class="panel panel-success">
-        <div class="panel-heading">Specify ingredients you want included in your queries: </div>
+      <div class="panel panel-default">
         <div class="panel-body">
           <div class=search>
-            <form class="form-inline active-green-4" method="post">
-              <i class="fa fa-search" aria-hidden="true"></i>
-              <input id="ingredient" type="text" class="form-control" placeholder="Include Ingredients" style="width: 90%">
+            <form>
+              <input class="input" placeholder="Specify which ingredients to include" type="text" >
             </form>
           </div>
           <br>
           <!-- dummy ingredient list -->
           <div class="container ingred-list include">
             <ul class="list-group">
-              {% if not arr %}
-              <p> hello <p>
-              {% endif %}
-              {% for ingred in arr %}
-              <li class="list-group-item">{{ingred}}
+              <li class="list-group-item">Tomato
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </span>
                 </span>
               </li>
-              {% endfor %}
+              <li class="list-group-item">Potato
+                <span class="remove">
+                  <span class="btn btn-sm btn-default" onclick="">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </span>
+                </span>
+              </li>
             </ul>
           </div>
         </div>
@@ -80,27 +80,24 @@
       <!-- end of first panel -->
       <br>
       <!-- create div to display exclude ingredients -->
-      <div class="panel panel-danger">
-        <div class="panel-heading">Specify ingredients you want excluded in your queries: </div>
+      <div class="panel panel-default">
         <div class="panel-body">
           <div class=search>
             <form class="form-inline active-red-4" method="post">
-              <i class="fa fa-search" aria-hidden="true"></i>
-              <input type="text" class="form-control" placeholder="Exclude Ingredients" style="width: 90%">
+              <input class="input" placeholder="Specify which ingredients to exclude" type="text" >
             </form>
           </div>
           <br>
-          <!-- dummy ingredient list -->
            <div class="container ingred-list exclude">
             <ul class="list-group">
-              <li class="list-group-item">Cras justo odio
+              <li class="list-group-item">Tomato
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </span>
                 </span>
               </li>
-              <li class="list-group-item">Vestibulum at eros
+              <li class="list-group-item">Potato
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
