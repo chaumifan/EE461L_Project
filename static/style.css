@@ -144,3 +144,10 @@ input[type=text]:focus {
   outline: none;
   box-shadow: 0 4px 2px -2px grey;
 }
+
+.submit {
+	box-shadow: -2px 2px 1px 1px darkgrey; /*default grey*/
+	font-size: 20px;
+	margin-bottom: 20px;
+	border: none;
+}
