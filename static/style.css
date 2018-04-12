@@ -83,6 +83,7 @@
 }
 
 .panel {
+	border-radius: 0 !important;
 	width: 80%
 	margin-left: auto;
 	margin-right: auto;
@@ -92,9 +93,16 @@
 	width: 100%;
 }
 
+.panel-text {
+	font-size: 15px;
+	margin-top: 10px;
+}
+
 .recipes .panel-heading {
+	font-weight: bold;
+	border-radius: 0 !important;
 	text-align: center;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .checked {
@@ -127,11 +135,12 @@ html, body {
 }
 
 .panel-default {
+	margin-bottom: 10px;
 	border: none;
 }
 
 input[type=text] {
-	font-size: 20px;
+	font-size: 17px;
 	text-align: center;
   height: 30px;
   border: 0;
@@ -146,8 +155,27 @@ input[type=text]:focus {
 }
 
 .submit {
-	box-shadow: -2px 2px 1px 1px darkgrey; /*default grey*/
-	font-size: 20px;
-	margin-bottom: 20px;
+	display: block;
+	width: 150px;
+	margin: 0 auto;
+	box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+	font-size: 17px;
+	margin-bottom: 25px;
 	border: none;
+}
+
+.link {
+	background-color: white;
+	color: black;
+	margin: 0 auto;
+	box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+	font-size: 17px;
+	margin-bottom: 25px;
+	border: none;
+}
+
+.link:hover {
+	background-color: lightgrey;
+	border: none;
+	color: black;
 }
