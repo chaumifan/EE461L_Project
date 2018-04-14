@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block scripts %}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var header = $('#header-img');
+    var backgrounds = new Array(
+      'static/background3.jpg',
+      'static/background2.jpg',
+      'static/background.jpg'
+    );
+
+    var current = 0;
+
+    function nextBackground() {
+        current++;
+        current = current % backgrounds.length;
+        header.css('background', 'linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url(' + backgrounds[current] + ')');
+        header.css('background-repeat', 'no-repeat');
+        header.css('background-size', '100%');
+    }
+    setInterval(nextBackground, 6000);
+
+    // header.css('background', backgrounds[0]);
+  });
+</script>
+{% endblock %}
+
+{% block nav_create %}<li class="active"><a>Upload Creation</a></li>{% endblock %}
+
+{% block body %}
+<div id="header-img" class="jumbotron">
+  <div id="title">
+    <img id="icon" src="{{ url_for('static', filename='icon_burned.png') }}" alt="Card image cap"/>
+    <h1> Pocket Recipes </h1>
+  </div>
+</div>
+<!-- end header section -->
+
+<div id="about" class="jumbotron">
+  <p>Find recipes that are right for your fridge</p>
+</div>
+<!-- end about section -->
+
+<div id="grid" class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form id="new-recipe-form">
+            <div class="panel-title">Recipe Name</div>
+            <input class="input" placeholder="Name" id="recipe-name" type="text" >
+            <br/>
+            <br/>
+  
+            <div class="panel-title">Recipe Link</div>
+            <input class="input" placeholder="Link" id="recipe-link" type="text" >
+            <br/>
+            <br/>
+
+            <div class="panel-title">Upload Photo</div>
+            <input class="input" id="recipe-photo" type="file" >
+            <br/>
+
+            <div class="panel-title">Ingredients</div>
+            <input class="input" placeholder="Specify which ingredients are required" type="text" >
+            <br/>
+            <br/>
+
+            <!-- dummy ingredient list -->
+            <div class="container ingred-list include">
+              <ul class="list-group">
+                <li class="list-group-item">Tomato
+                  <span class="remove">
+                    <span class="btn btn-sm btn-default" onclick="">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </span>
+                  </span>
+                </li>
+                <li class="list-group-item">Potato
+                  <span class="remove">
+                    <span class="btn btn-sm btn-default" onclick="">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body panel-header">
+          <h3> Guidelines and Instructions for Submission </h3>
+        </div>
+        <div class="panel-body">
+          <div class="panel-text">You know the rules. If you upload it, we own it.</div>
+          <br/>
+          <input type="checkbox" name="accept-terms"/>
+          <label for="accept-terms">I accept these onerous terms and conditions</label>
+          <br/>
+          <br/>
+          <div class="submit btn btn-sm btn-default" onclick="">Submit Recipe</div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!-- end of grid -->
+{% endblock %}

@@ -53,6 +53,12 @@
 	width: 100%;
 	margin-left: 0px;
 }
+.ingred-list li {
+	display: inline;
+	float: left;
+	margin-right: 10px;
+}
+
 .remove {
 	float: right;
 }
@@ -140,8 +146,8 @@ html, body {
 }
 
 input[type=text] {
-	font-size: 17px;
-	text-align: center;
+  font-size: 17px;
+  text-align: center;
   height: 30px;
   border: 0;
   width: 100%;
@@ -152,6 +158,14 @@ input[type=text] {
 input[type=text]:focus {
   outline: none;
   box-shadow: 0 4px 2px -2px grey;
+}
+
+input[type=file] {
+	margin-top: 10px;
+}
+
+form#new-recipe-form input[type=text] {
+	text-align: left;
 }
 
 .submit {
@@ -178,4 +192,10 @@ input[type=text]:focus {
 	background-color: lightgrey;
 	border: none;
 	color: black;
+}
+
+.panel-header {
+	background-color: lightblue;
+	color: black;
+	border-style: none none groove none; 
 }
