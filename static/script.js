@@ -1,3 +1,5 @@
+var local_ingred_set = new Set();
+
 function htmlToElement(html) {
     var template = document.createElement('template');
     template.innerHTML = html.trim();
@@ -50,11 +52,14 @@ $(function(){
         var ingred_input = $(this).find('input');
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
-        var list = document.getElementById('ingred_list');
-        list.appendChild(createIngredHTML(ingred));
-        if (history.pushState) {
-            var newurl = updateIngredList(ingred);
-            window.history.pushState({path:newurl},'',newurl);
+        if (!local_ingred_set[ingred]) {
+            var list = document.getElementById('ingred_list');
+            list.appendChild(createIngredHTML(ingred));
+            if (history.pushState) {
+                var newurl = updateIngredList(ingred);
+                window.history.pushState({path:newurl},'',newurl);
+            }
+            local_ingred_set[ingred] = true;
         }
     });
 
@@ -63,11 +68,14 @@ $(function(){
         var exclude_input = $(this).find('input');
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
-        var list = document.getElementById('exclude_list');
-        list.appendChild(createIngredHTML(exclude));
-        if (history.pushState) {
-            var newurl = updateExcludeList(exclude);
-            window.history.pushState({path:newurl},'',newurl);
+        if (!local_ingred_set[exclude]) {
+            var list = document.getElementById('exclude_list');
+            list.appendChild(createIngredHTML(exclude));
+            if (history.pushState) {
+                var newurl = updateExcludeList(exclude);
+                window.history.pushState({path:newurl},'',newurl);
+            }
+            local_ingred_set[exclude] = true;
         }
     });
 });
