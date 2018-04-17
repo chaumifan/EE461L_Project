@@ -52,14 +52,14 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class=search>
-            <form>
-              <input class="input" placeholder="Specify which ingredients to include" type="text" >
+            <form id="addIngredient">
+              <input class="input" placeholder="Specify which ingredients to include" type="text">
             </form>
           </div>
           <br>
           <!-- dummy ingredient list -->
           <div class="container ingred-list include">
-            <ul class="list-group">
+            <ul class="list-group" id="ingred_list">
               <li class="list-group-item">Tomato
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
@@ -84,13 +84,13 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class=search>
-            <form class="form-inline active-red-4" method="post">
+            <form class="form-inline active-red-4" id="addExclude">
               <input class="input" placeholder="Specify which ingredients to exclude" type="text" >
             </form>
           </div>
           <br>
            <div class="container ingred-list exclude">
-            <ul class="list-group">
+            <ul class="list-group" id="exclude_list">
               <li class="list-group-item">Tomato
                 <span class="remove">
                   <span class="btn btn-sm btn-default" onclick="">
