@@ -1,4 +1,6 @@
 var local_ingred_set = new Set();
+var ingredRegex = new RegExp("([?&])ingred_list=.*?(&|$)", "i");
+var excludeRegex = new RegExp("([?&])exclude_list=.*?(&|$)", "i");
 
 function htmlToElement(html) {
     var template = document.createElement('template');
@@ -6,60 +8,131 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-function createIngredHTML(ingred) {
+function createHTML(ingred) {
     return htmlToElement('<li class="list-group-item">' + ingred + '<span class="remove"><span class="btn btn-sm btn-default" onclick=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span></li>');
 }
 
-function updateIngredList(ingred) {
+function addToIngredListQuery(ingred) {
     var uri = window.location.href;
-    var re = new RegExp("([?&])ingred_list=.*?(&|$)", "i");
-    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
     var res;
-    if (res = uri.match(re)) {
-        console.log(res);
+    if (res = uri.match(ingredRegex)) {
         var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
-        list_val = list_val + ',' + ingred;
-        return uri.replace(re, '$1' + 'ingred_list' + "=" + list_val + '$2');
+        if (list_val.length == 0) {
+            list_val = ingred;
+        } else {
+            if (list_val.indexOf('&') !== -1) {
+                list_val = list_val.replace('&', '');
+            }
+            list_val = list_val + ',' + ingred;
+        }
+        return uri.replace(ingredRegex, '$1' + 'ingred_list' + "=" + list_val + '$2');
     }
     else {
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
         return uri + separator + 'ingred_list' + "=" + ingred;
     }
 }
 
-function createExcludeHTML(exclude) {
-    return htmlToElement('<li class="list-group-item">' + exclude + '<span class="remove"><span class="btn btn-sm btn-default" onclick=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span></li>');
-}
-
-function updateExcludeList(exclude) {
+function addToExcludeListQuery(exclude) {
     var uri = window.location.href;
-    var re = new RegExp("([?&])exclude_list=.*?(&|$)", "i");
-    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
     var res;
-    if (res = uri.match(re)) {
-        console.log(res);
+    if (res = uri.match(excludeRegex)) {
         var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
-        list_val = list_val + ',' + exclude;
-        return uri.replace(re, '$1' + 'exclude_list' + "=" + list_val + '$2');
+        console.log(res);
+        console.log(list_val);
+        if (list_val.length == 0) {
+            list_val = exclude;
+        } else {
+            if (list_val.indexOf('&') !== -1) {
+                list_val = list_val.replace('&', '');
+            }
+            list_val = list_val + ',' + exclude;
+        }
+        return uri.replace(excludeRegex, '$1' + 'exclude_list' + "=" + list_val + '$2');
     }
     else {
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
         return uri + separator + 'exclude_list' + "=" + exclude;
     }
 }
 
+function removeIngred(ingred) {
+    var uri = window.location.href;
+    var re = new RegExp('(,?)' + ingred + '(,?)', "i");
+    var res;
+    if (res = uri.match(re)) {
+        if (res[1].length > 0) {
+            return uri.replace(re, '$2');
+        } else {
+            return uri.replace(re, '');
+        }
+    } else {
+        return uri;
+    }
+}
+
+function updateURL(url) {
+    if (history.pushState) {
+        window.history.pushState({path:url}, '', url);
+    } else {
+        window.location.href = url;
+    }
+}
+
+function loadIngredients() {
+    var uri = window.location.href;
+    var res;
+    if (res = uri.match(ingredRegex)) {
+        var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
+        var tokens = list_val.split(',');
+        var include_list = document.getElementById('ingred_list');
+        tokens.forEach(function(e) {
+            if (e.indexOf('&') !== -1) {
+                e = e.replace('&', '');
+            }
+            if (e.length > 0 && !local_ingred_set.has(e)) {
+                ingred_list.appendChild(createHTML(e));
+                local_ingred_set.add(e);
+            }
+        });
+    }
+}
+
+function loadExcludes() {
+    var uri = window.location.href;
+    var res;
+    if (res = uri.match(excludeRegex)) {
+        var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
+        var tokens = list_val.split(',');
+        var exclude_list = document.getElementById('exclude_list');
+        tokens.forEach(function(e) {
+            if (e.indexOf('&') !== -1) {
+                e = e.replace('&', '');
+            }
+            if (e.length > 0 && !local_ingred_set.has(e)) {
+                exclude_list.appendChild(createHTML(e));
+                local_ingred_set.add(e);
+            }
+        });
+    }
+}
+
 $(function(){
+    // Load ingredients and excludes from query string
+    loadIngredients();
+    loadExcludes();
+
+    // Bind adding/removing ingredients
     $('#addIngredient').submit(function(e) {
         e.preventDefault();
         var ingred_input = $(this).find('input');
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
-        if (!local_ingred_set[ingred]) {
-            var list = document.getElementById('ingred_list');
-            list.appendChild(createIngredHTML(ingred));
-            if (history.pushState) {
-                var newurl = updateIngredList(ingred);
-                window.history.pushState({path:newurl},'',newurl);
-            }
-            local_ingred_set[ingred] = true;
+        if (!local_ingred_set.has(ingred)) {
+            var ingred_list = document.getElementById('ingred_list');
+            ingred_list.appendChild(createHTML(ingred));
+            updateURL(addToIngredListQuery(ingred));
+            local_ingred_set.add(ingred);
         }
     });
 
@@ -68,14 +141,27 @@ $(function(){
         var exclude_input = $(this).find('input');
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
-        if (!local_ingred_set[exclude]) {
-            var list = document.getElementById('exclude_list');
-            list.appendChild(createIngredHTML(exclude));
-            if (history.pushState) {
-                var newurl = updateExcludeList(exclude);
-                window.history.pushState({path:newurl},'',newurl);
-            }
-            local_ingred_set[exclude] = true;
+        if (!local_ingred_set.has(exclude)) {
+            var exclude_list = document.getElementById('exclude_list');
+            exclude_list.appendChild(createHTML(exclude));
+            updateURL(addToExcludeListQuery(exclude));
+            local_ingred_set.add(exclude);
         }
+    });
+
+    $('#ingred_list').on('click', 'span.remove', function (e) {
+        var include_list = document.getElementById('ingred_list');
+        var ingred = this.parentNode.textContent;
+        local_ingred_set.delete(ingred);
+        include_list.removeChild(this.parentNode);
+        updateURL(removeIngred(ingred));
+    });
+
+    $('#exclude_list').on('click', 'span.remove', function (e) {
+        var exclude_list = document.getElementById('exclude_list');
+        var ingred = this.parentNode.textContent;
+        local_ingred_set.delete(ingred);
+        exclude_list.removeChild(this.parentNode);
+        updateURL(removeIngred(ingred));
     });
 });

@@ -25,6 +25,7 @@
     // header.css('background', backgrounds[0]);
   });
 </script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 
 {% block nav_browse %}<li class="active"><a>Browse Recipes</a></li>{% endblock %}
@@ -53,27 +54,14 @@
         <div class="panel-body">
           <div class=search>
             <form id="addIngredient">
-              <input class="input" placeholder="Specify which ingredients to include" type="text">
+              <input class="input" placeholder="Add new ingredient" type="text">
             </form>
           </div>
           <br>
           <!-- dummy ingredient list -->
           <div class="container ingred-list include">
             <ul class="list-group" id="ingred_list">
-              <li class="list-group-item">Tomato
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Potato
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
+              <!-- where included ingredients get inserted in -->
             </ul>
           </div>
         </div>
@@ -85,26 +73,13 @@
         <div class="panel-body">
           <div class=search>
             <form class="form-inline active-red-4" id="addExclude">
-              <input class="input" placeholder="Specify which ingredients to exclude" type="text" >
+              <input class="input" placeholder="Exclude new ingredient" type="text" >
             </form>
           </div>
           <br>
            <div class="container ingred-list exclude">
             <ul class="list-group" id="exclude_list">
-              <li class="list-group-item">Tomato
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
-              <li class="list-group-item">Potato
-                <span class="remove">
-                  <span class="btn btn-sm btn-default" onclick="">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </span>
-                </span>
-              </li>
+              <!-- where excluded ingredients get inserted in -->
             </ul>
           </div>
         </div>
