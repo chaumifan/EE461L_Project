@@ -27,9 +27,10 @@ def create():
 @app.route('/submit_query', methods=['POST'])
 def submit_query():
 	ingred_list = request.form.getlist('ingredients[]')
-	exclude_list = request.form.getlist('exclude[]')
+	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
 	return render_template('recipes.html', res=recipes)
+	#return ','.join(ingred_list) + ':' + ','.join(exclude_list)
 
 @app.context_processor
 def utility_processor():

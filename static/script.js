@@ -1,4 +1,5 @@
 var local_ingred_set = new Set();
+var local_exclude_set = new Set();
 var ingredRegex = new RegExp("([?&])ingred_list=.*?(&|$)", "i");
 var excludeRegex = new RegExp("([?&])exclude_list=.*?(&|$)", "i");
 
@@ -12,17 +13,22 @@ function createHTML(ingred) {
     return htmlToElement('<li class="list-group-item">' + ingred + '<span class="remove"><span class="btn btn-sm btn-default" onclick=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span></li>');
 }
 
+function extractList(res) {
+    var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
+    if (list_val.indexOf('&') !== -1) {
+        list_val = list_val.replace('&', '');
+    }
+    return list_val;
+}
+
 function addToIngredListQuery(ingred) {
     var uri = window.location.href;
     var res;
     if (res = uri.match(ingredRegex)) {
-        var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
+        var list_val = extractList(res);
         if (list_val.length == 0) {
             list_val = ingred;
         } else {
-            if (list_val.indexOf('&') !== -1) {
-                list_val = list_val.replace('&', '');
-            }
             list_val = list_val + ',' + ingred;
         }
         return uri.replace(ingredRegex, '$1' + 'ingred_list' + "=" + list_val + '$2');
@@ -37,15 +43,10 @@ function addToExcludeListQuery(exclude) {
     var uri = window.location.href;
     var res;
     if (res = uri.match(excludeRegex)) {
-        var list_val = res[0].substring(res[0].lastIndexOf('=') + 1);
-        console.log(res);
-        console.log(list_val);
+        var list_val = extractList(res);
         if (list_val.length == 0) {
             list_val = exclude;
         } else {
-            if (list_val.indexOf('&') !== -1) {
-                list_val = list_val.replace('&', '');
-            }
             list_val = list_val + ',' + exclude;
         }
         return uri.replace(excludeRegex, '$1' + 'exclude_list' + "=" + list_val + '$2');
@@ -90,7 +91,7 @@ function loadIngredients() {
             if (e.indexOf('&') !== -1) {
                 e = e.replace('&', '');
             }
-            if (e.length > 0 && !local_ingred_set.has(e)) {
+            if (e.length > 0 && !local_ingred_set.has(e) && !local_exclude_set.has(e)) {
                 ingred_list.appendChild(createHTML(e));
                 local_ingred_set.add(e);
             }
@@ -109,9 +110,9 @@ function loadExcludes() {
             if (e.indexOf('&') !== -1) {
                 e = e.replace('&', '');
             }
-            if (e.length > 0 && !local_ingred_set.has(e)) {
+            if (e.length > 0 && !local_ingred_set.has(e) && !local_exclude_set.has(e)) {
                 exclude_list.appendChild(createHTML(e));
-                local_ingred_set.add(e);
+                local_exclude_set.add(e);
             }
         });
     }
@@ -128,7 +129,7 @@ $(function(){
         var ingred_input = $(this).find('input');
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
-        if (!local_ingred_set.has(ingred)) {
+        if (!local_ingred_set.has(ingred) && !local_exclude_set.has(ingred)) {
             var ingred_list = document.getElementById('ingred_list');
             ingred_list.appendChild(createHTML(ingred));
             updateURL(addToIngredListQuery(ingred));
@@ -141,11 +142,11 @@ $(function(){
         var exclude_input = $(this).find('input');
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
-        if (!local_ingred_set.has(exclude)) {
+        if (!local_ingred_set.has(exclude) && !local_exclude_set.has(exclude)) {
             var exclude_list = document.getElementById('exclude_list');
             exclude_list.appendChild(createHTML(exclude));
             updateURL(addToExcludeListQuery(exclude));
-            local_ingred_set.add(exclude);
+            local_exclude_set.add(exclude);
         }
     });
 
@@ -160,8 +161,18 @@ $(function(){
     $('#exclude_list').on('click', 'span.remove', function (e) {
         var exclude_list = document.getElementById('exclude_list');
         var ingred = this.parentNode.textContent;
-        local_ingred_set.delete(ingred);
+        local_exclude_set.delete(ingred);
         exclude_list.removeChild(this.parentNode);
         updateURL(removeIngred(ingred));
+    });
+
+    $('#submitQuery').on('click', function (e) {
+        var uri = window.location.href;
+        var ingred_list = Array.from(local_ingred_set);
+        var exclude_list = Array.from(local_exclude_set);
+        $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
+            var results = document.getElementById('results');
+            results.innerHTML = data;
+        });
     });
 });
