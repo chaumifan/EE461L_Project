@@ -1,13 +1,13 @@
 from google.appengine.ext import ndb
 
 def create_recipe(name, instructions, image_link, ingred_list):
-	recipe = Recipe({
-		'name': name,
-		'instructions': instructions,
-		'image_link': image_link,
-		'ingred_list': ingred_list,
-		'id': name
-		})
+	recipe = Recipe(
+		name=name,
+		instructions=instructions,
+		image_link=image_link,
+		ingred_list=ingred_list,
+		id=name
+		)
 	recipe.put()
 	for ingred in ingred_list:
 		pass
@@ -51,7 +51,7 @@ def query_ingredients(ingred_list, exclude_list):
 		ret.append(key.get())
 	return ret
 
-def save_ingredients_to_user(user, ingred_list):
+def save_ingredients_to_user(user, ingred_list, exclude_list):
 	pass
 
 def load_ingredients_from_user(user):
