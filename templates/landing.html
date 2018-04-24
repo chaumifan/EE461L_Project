@@ -47,7 +47,36 @@
 <div id="grid" class="container">
   <!-- create div to display include ingredients -->
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
+      <div class=info>
+        <h3>About Pocket Recipes</h3>
+        <br>
+        <p>
+            Have you ever had the problem where you have a full fridge but don't know what to do with all your ingredients?
+            <br>
+            Simply enter in all of the ingredients you want to use and we will curate a list of recipes that fit your fridge.
+          <br>
+          <div class=instr>
+            <h3>It's as easy as 1, 2, 3!</h3>
+            <ol>
+              <li>Enter all ingredients you want to include in the recipes in the TOP box</li>
+              <li>Enter all ingredients you are allergic to or just don't like in the BOTTOM box</li>
+              <li>Submit Query!</li>
+            </ol>
+          </div>
+        </p>
+      </div>
+      <br>
+      {% if user %}
+        <h3 id=usr>Welcome back, returning user!</h3>
+        <br>
+        <!-- start of recipe panels -->
+        <div class="submit btn btn-sm btn-default" id="submitQuery">Save Query</div>
+        <div class="submit btn btn-sm btn-default" id="submitQuery">Re-load Query</div>
+      {% endif %}
+    </div>
+
+    <div class="col-sm-4">
       <div class="submit btn btn-sm btn-default" id="submitQuery">Submit Query</div>
       <!-- search row -->
       <div class="panel panel-default">
@@ -88,7 +117,7 @@
     </div>
 
     <div id="results">
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <!-- start of recipe panels -->
         <div class="panel panel-default recipes">
           <!-- dummy individual panels -->
@@ -107,48 +136,6 @@
           </div>
         </div>
 
-      </div>
-
-      <div class="col-sm-3">
-        <!-- start of recipe panels -->
-        <div class="panel panel-default recipes">
-          <!-- dummy individual panels -->
-          <div class="panel-heading">Example Recipe Name</div>
-          <img class="panel-img-top" src="https://i.imgur.com/0K4qGqY.jpg" alt="Card image cap">
-          <div class="panel-body">
-            <h2 class="panel-title">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            </h2>
-            <p class="panel-text">Description of recipe, etc.etc.etc...</p>
-            <a href="#" class="link btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col-sm-3">
-        <!-- start of recipe panels -->
-        <div class="panel panel-default recipes">
-          <!-- dummy individual panels -->
-          <div class="panel-heading">Example Recipe Name</div>
-          <img class="panel-img-top" src="https://i.imgur.com/0K4qGqY.jpg" alt="Card image cap">
-          <div class="panel-body">
-            <h2 class="panel-title">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            </h2>
-            <p class="panel-text">Description of recipe, etc.etc.etc...</p>
-            <a href="#" class="link btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        
       </div>
 
     </div>

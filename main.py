@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from google.appengine.api import users
 import database as db
 
@@ -12,16 +12,16 @@ def landing():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
 	if request.method == 'POST':
 		name = request.form['name']
 		instructions = request.form['instructions']
 		image_link = request.form['image_link']
 		ingred_list = request.form.getlist('ingredients[]')
 		db.create_recipe(name, instructions, image_link, ingred_list)
-		return redirect(url_for("index"))
+		return redirect(url_for('landing'))
 	else:
-		if not user:
-			return redirect(users.create_login_url(request.url))
 		return render_template('create.html', user=user)
 
 @app.route('/submit_query', methods=['POST'])
@@ -31,6 +31,25 @@ def submit_query():
 	recipes = db.query_ingredients(ingred_list, exclude_list)
 	return render_template('recipes.html', res=recipes)
 	#return ','.join(ingred_list) + ':' + ','.join(exclude_list)
+
+@app.route('/save_ingredients', methods=['POST'])
+def save_ingredients():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	ingred_list = request.form.getlist('ingredients[]')
+	exclude_list = request.form.getlist('excludes[]')
+	db.save_ingredients_to_user(user, ingred_list, exclude_list)
+	return 'OK' #Return value doesn't matter
+
+@app.route('/load_ingredients', methods=['GET'])
+def load_ingredients():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	# load ingredients from database, redirect browser to correct query params
+	query_params = ''
+	return redirect(url_for('landing') + query_params)
 
 @app.context_processor
 def utility_processor():
