@@ -23,6 +23,9 @@ class DatastoreTestCase(unittest.TestCase):
 		db.create_recipe('potatoes', 'fry them', 'https://fries.com', list(potato, salt, pepper, oil))
 		db.create_recipe('eggs', 'stir them', 'https://eggs.com', list(eggs, milk))
 
+	#################
+	# TEST CONTAINS #
+	#################
 	def test_contains(self):
 		v1 = db.contains_ingred('rice');
 		v2 = db.contains_ingred('veggies');
@@ -32,11 +35,50 @@ class DatastoreTestCase(unittest.TestCase):
 		v6 = db.contains_ingred('');
 		expected = [True, True, True, True, False, False]
 		actual = [v1, v2, v3, v4, v5, v6]
-		if expected == actual:
-			print "PASSED TEST_CONTAINS"
-		else:
-			print "FAILED TEST_CONTAINS"
+		self.assertListEqual(expected, actual)
 
+	##############
+	# TEST QUERY #
+	##############
+	def test_query_empty(self):
+		res = db.query_ingredients(list(), list())
+		self.assertEquals(res, None)
+
+	def test_query_simple(self):
+		include = ['rice', 'water']
+		res = db.query_ingredients(include, list())
+		self.assertEquals(len(res), 1)
+		# TODO: create recipe obj and test equals
+
+	def test_query_multiple(self):
+		include = ['rice, potato']
+		res = db.query_ingredients(include, list())
+		self.assertEquals(len(res), 2)
+		# TODO: create recipe obj and test equals
+
+	def test_query_duplicate(self):
+		include = ['oil']
+		res = db.query_ingredients(include, list())
+		self.assertEquals(len(res), 2)
+		# TODO:create recipe obj and test equals
+
+	def test_query_exclude(self):
+		include = ['oil']
+		exclude = ['potato']
+		res = db.query_ingredients(include, exclude)
+		self.assertEquals(len(res), 1)
+		# TODO:create recipe obj and test equals
+
+	def test_query_all_exclude(self):
+		include = ['oil']
+		exclude = ['potato', 'veggies', 'salt']
+		res = db.query_ingredients(include, exclude)
+		self.assertEquals(len(res), 0)
+		# TODO:create recipe obj and test equals
+
+	###############
+	# TEST CREATE #
+	###############
 
 if __name__ == '__main__':
 	unittest.main()

@@ -19,18 +19,28 @@ def create_recipe(name, instructions, image_link, ingred_list):
 
 def contains_ingred(ingred):
 	q = Ingredient.query(Ingredient.name == ingred)
-	return q is not None;
+	result = q.fetch()
+	return not(result is None) and len(result) > 0;
 
 
 def query_ingredients(ingred_list, exclude_list):
+	if (len(ingred_list) == 0 and len(exclude_list) == 0):
+		return None
+
 	recipes = set()
-	q = Ingredient.query(Ingredient.name.IN(ingred_list))
-	include_results = q.fetch()
-	p = Ingredient.query(Ingredient.name.IN(exclude_list))
-	exclude_results = p.fetch()
+	if not(ingred_list is None) and len(ingred_list) > 0:
+		q = Ingredient.query(Ingredient.name.IN(ingred_list))
+		include_results = q.fetch()
+	else:
+		include_results = list()
+	if not(exclude_list is None) and len(exclude_list) > 0:
+		p = Ingredient.query(Ingredient.name.IN(exclude_list))
+		exclude_results = p.fetch()
+	else:
+		exclude_results = list()
+
 	for i in include_results:
 		recipes.update(i.recipe_list)
-
 	for e in exclude_results:
 		recipes.difference_update(e.recipe_list)
 
