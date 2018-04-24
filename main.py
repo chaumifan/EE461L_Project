@@ -42,7 +42,7 @@ def save_ingredients():
 	db.save_ingredients(user, ingred_list, exclude_list)
 	return 'OK' #Return value doesn't matter
 
-@app.route('load_ingredients', methods=['GET'])
+@app.route('/load_ingredients', methods=['GET'])
 def load_ingredients():
 	user = users.get_current_user()
 	if not user:
