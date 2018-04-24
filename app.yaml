@@ -7,3 +7,12 @@ handlers:
   static_dir: static
 - url: /.*
   script: main.app
+
+env_variables:
+    CLOUDSQL_CONNECTION_NAME: ee461l-project
+    CLOUDSQL_USER: root
+    CLOUDSQL_PASSWORD: ayuqdB9EHbuhKPJK
+
+libraries:
+- name: MySQLdb
+  version: "latest"
