@@ -1,114 +1,112 @@
 .navbar {
-	width: 100%;
-	/*background-color: #e3f2fd; */
-	margin: auto;
+  width: 100%;
+  /*background-color: #e3f2fd; */
+  margin: auto;
 }
 #icon {
-	width: 75px;
-	height: 75px;
+  width: 75px;
+  height: 75px;
 }
 #body {
-	width: 100%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
+  width: 100%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #title {
-	margin-top: 270px
+  margin-top: 270px
 }
 
 #about {
-	width: 80%;
-	margin: auto;
-	text-align: center;
-	background-color: #131712;
-	color: grey;
-	height: 100px;
-	padding-top: 0px;
-	font-style: italic;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  background-color: #131712;
+  color: grey;
+  height: 100px;
+  padding-top: 0px;
+  font-style: italic;
 }
 
 .container .jumbotron {
-	border-radius: 0px;
+  border-radius: 0px;
 }
 
 #header-img {
-	width: 80%;
-	height: 500px;
-	margin: auto;
+  width: 80%;
+  height: 500px;
+  margin: auto;
   background: linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url('background.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
-	text-align: center;
-	color:white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+  color:white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 #grid {
-	width: 80%;
-	margin-top: 75px;
+  width: 80%;
+  margin-top: 75px;
 }
 .ingred-list {
-	width: 100%;
-	margin-left: 0px;
+  width: 100%;
+  margin-left: 0px;
 }
 .ingred-list li {
-	display: inline;
-	float: left;
-	margin-right: 10px;
+  display: inline;
+  float: left;
+  margin-right: 10px;
 }
 
 .remove {
-	float: right;
+  float: right;
 }
 .remove .btn {
-	border: 0px solid transparent;
+  border: 0px solid transparent;
 }
 
 .include .list-group-item {
-	height: 35px;
-	font-size: 17px;
-	overflow: hidden; 
+  height: 35px;
+  font-size: 17px;
+  overflow: hidden; 
   text-overflow: ellipsis; 
-  white-space: nowrap;
   border: none;
-	box-shadow: 0 4px 2px -2px darkolivegreen; /*green*/
-	margin-bottom: 5px;
+  box-shadow: 0 4px 2px -2px darkolivegreen; /*green*/
+  margin-bottom: 5px;
 }
 
 .exclude .list-group-item {
-	height: 35px;
-	font-size: 17px;
-	overflow: hidden; 
+  height: 35px;
+  font-size: 17px;
+  overflow: hidden; 
   text-overflow: ellipsis; 
-  white-space: nowrap;
   border: none;
-	box-shadow: 0 4px 2px -2px darkred; /*green*/
-	margin-bottom: 5px;
+  box-shadow: 0 4px 2px -2px darkred; /*green*/
+  margin-bottom: 5px;
 }
 
 .panel {
-	border-radius: 0 !important;
-	width: 80%
-	margin-left: auto;
-	margin-right: auto;
+  border-radius: 0 !important;
+  width: 80%
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .panel-img-top {
-	width: 100%;
+  width: 100%;
 }
 
 .panel-text {
-	font-size: 15px;
-	margin-top: 10px;
+  font-size: 15px;
+  margin-top: 10px;
 }
 
 .recipes .panel-heading {
-	font-weight: bold;
-	border-radius: 0 !important;
-	text-align: center;
-	font-size: 18px;
+  font-weight: bold;
+  border-radius: 0 !important;
+  text-align: center;
+  font-size: 18px;
 }
 
 .checked {
@@ -116,15 +114,15 @@
 }
 
 .recipes .panel-title {
-	text-align: center;
+  text-align: center;
 }
 
 .recipes .btn {
-	float: right;
+  float: right;
 }
 
 .footer {
-	margin-top: 75px;
+  margin-top: 75px;
   height: 100px;
   bottom: 0;
   width: 100%;
@@ -141,8 +139,8 @@ html, body {
 }
 
 .panel-default {
-	margin-bottom: 10px;
-	border: none;
+  margin-bottom: 10px;
+  border: none;
 }
 
 input[type=text] {
@@ -161,41 +159,41 @@ input[type=text]:focus {
 }
 
 input[type=file] {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 form#new-recipe-form input[type=text] {
-	text-align: left;
+  text-align: left;
 }
 
 .submit {
-	display: block;
-	width: 150px;
-	margin: 0 auto;
-	box-shadow: 3px 3px 8px darkgrey; /*default grey*/
-	font-size: 17px;
-	margin-bottom: 25px;
-	border: none;
+  display: block;
+  width: 150px;
+  margin: 0 auto;
+  box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+  font-size: 17px;
+  margin-bottom: 25px;
+  border: none;
 }
 
 .link {
-	background-color: white;
-	color: black;
-	margin: 0 auto;
-	box-shadow: 3px 3px 8px darkgrey; /*default grey*/
-	font-size: 17px;
-	margin-bottom: 25px;
-	border: none;
+  background-color: white;
+  color: black;
+  margin: 0 auto;
+  box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+  font-size: 17px;
+  margin-bottom: 25px;
+  border: none;
 }
 
 .link:hover {
-	background-color: lightgrey;
-	border: none;
-	color: black;
+  background-color: lightgrey;
+  border: none;
+  color: black;
 }
 
 .panel-header {
-	background-color: lightblue;
-	color: black;
-	border-style: none none groove none; 
+  background-color: lightblue;
+  color: black;
+  border-style: none none groove none; 
 }

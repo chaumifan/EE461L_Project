@@ -18,8 +18,8 @@ def create_recipe(name, instructions, image_link, ingred_list):
 			# Create new ingredient
 
 def contains_ingred(ingred):
-	q = Ingredient.query(ingred)
-	return q is None;
+	q = Ingredient.query(Ingredient.name == ingred)
+	return q is not None;
 
 
 def query_ingredients(ingred_list, exclude_list):
