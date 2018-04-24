@@ -71,7 +71,6 @@
   font-size: 17px;
   overflow: hidden; 
   text-overflow: ellipsis; 
-  white-space: nowrap;
   border: none;
   box-shadow: 0 4px 2px -2px darkolivegreen; /*green*/
   margin-bottom: 5px;
@@ -82,7 +81,6 @@
   font-size: 17px;
   overflow: hidden; 
   text-overflow: ellipsis; 
-  white-space: nowrap;
   border: none;
   box-shadow: 0 4px 2px -2px darkred; /*green*/
   margin-bottom: 5px;
