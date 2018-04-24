@@ -167,12 +167,19 @@ $(function(){
     });
 
     $('#submitQuery').on('click', function (e) {
-        var uri = window.location.href;
         var ingred_list = Array.from(local_ingred_set);
         var exclude_list = Array.from(local_exclude_set);
         $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
             var results = document.getElementById('results');
             results.innerHTML = data;
+        });
+    });
+
+    $('#saveQuery').on('click', function (e) {
+        var ingred_list = Array.from(local_ingred_set);
+        var exclude_list = Array.from(local_exclude_set);
+        $.post('save_ingredients', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
+            alert("Ingredients saved to your account!");
         });
     });
 });
