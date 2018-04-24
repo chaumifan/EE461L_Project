@@ -41,7 +41,7 @@ def query_ingredients(ingred_list, exclude_list):
 		ret.append(key.get())
 	return ret
 
-def save_ingredients_to_user(user, ingred_list):
+def save_ingredients_to_user(user, ingred_list, exclude_list):
 	pass
 
 def load_ingredients_from_user(user):
