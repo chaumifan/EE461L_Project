@@ -17,6 +17,10 @@ def create_recipe(name, instructions, image_link, ingred_list):
 		# Else
 			# Create new ingredient
 
+def contains_ingred(ingred):
+	q = Ingredient.query(ingred)
+	return q is None;
+
 
 def query_ingredients(ingred_list, exclude_list):
 	recipes = set()
