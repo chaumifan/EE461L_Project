@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from google.appengine.api import users
 import database as db
 
@@ -12,16 +12,16 @@ def landing():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
 	if request.method == 'POST':
 		name = request.form['name']
 		instructions = request.form['instructions']
 		image_link = request.form['image_link']
 		ingred_list = request.form.getlist('ingredients[]')
 		db.create_recipe(name, instructions, image_link, ingred_list)
-		return redirect(url_for("index"))
+		return redirect(url_for('landing'))
 	else:
-		if not user:
-			return redirect(users.create_login_url(request.url))
 		return render_template('create.html', user=user)
 
 @app.route('/submit_query', methods=['POST'])
