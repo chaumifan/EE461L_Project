@@ -67,11 +67,13 @@
         </p>
       </div>
       <br>
-      <h3 id=usr>Welcome back, returning user!</h3>
-      <br>
-      <!-- start of recipe panels -->
-      <div class="submit btn btn-sm btn-default" id="submitQuery">Submit Query</div>
-      <div class="submit btn btn-sm btn-default" id="submitQuery">Submit Query</div>
+      {% if user %}
+        <h3 id=usr>Welcome back, returning user!</h3>
+        <br>
+        <!-- start of recipe panels -->
+        <div class="submit btn btn-sm btn-default" id="submitQuery">Save Query</div>
+        <div class="submit btn btn-sm btn-default" id="submitQuery">Re-load Query</div>
+      {% endif %}
     </div>
 
     <div class="col-sm-4">
