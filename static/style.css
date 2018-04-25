@@ -148,7 +148,7 @@ input[type=text] {
   text-align: center;
   height: 30px;
   border: 0;
-  width: 100%;
+  width: 93%;
   box-shadow: -0 4px 2px -2px #ebebeb; /*default grey*/
   -webkit-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
@@ -200,8 +200,8 @@ form#new-recipe-form input[type=text] {
 
 /* Inlines the add query button */
 .search {
-  display: inline-block;
-  white-space: nowrap;
+  width: 100%
+  margin: 0 auto;
 }
 
 .info {
@@ -226,5 +226,31 @@ form#new-recipe-form input[type=text] {
 }
 
 #usr {
+  text-align: center;
+}
+
+.plus_btn {
+  background-color: white;
+  float: right;
+  box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+  font-size: 17px;
+  border: none;
+  outline: none;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  color: darkgrey !important;
+}
+
+.plus_btn:hover {
+  background-color: lightgrey;
+}
+
+.trio {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.greet {
   text-align: center;
 }
