@@ -129,7 +129,7 @@ $(function(){
         var ingred_input = $(this).find('input');
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
-        if (!local_ingred_set.has(ingred) && !local_exclude_set.has(ingred)) {
+        if (ingred.length > 0 && !local_ingred_set.has(ingred) && !local_exclude_set.has(ingred)) {
             var ingred_list = document.getElementById('ingred_list');
             ingred_list.appendChild(createHTML(ingred));
             updateURL(addToIngredListQuery(ingred));
@@ -142,7 +142,7 @@ $(function(){
         var exclude_input = $(this).find('input');
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
-        if (!local_ingred_set.has(exclude) && !local_exclude_set.has(exclude)) {
+        if (exclude.length > 0 && !local_ingred_set.has(exclude) && !local_exclude_set.has(exclude)) {
             var exclude_list = document.getElementById('exclude_list');
             exclude_list.appendChild(createHTML(exclude));
             updateURL(addToExcludeListQuery(exclude));

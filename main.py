@@ -19,7 +19,7 @@ def create():
 		instructions = request.form['instructions']
 		image_link = request.form['image_link']
 		ingred_list = request.form.getlist('ingredients[]')
-		db.create_recipe(name, instructions, image_link, ingred_list)
+		db.create_recipe(name, user, instructions, image_link, ingred_list)
 		return redirect(url_for('landing'))
 	else:
 		return render_template('create.html', user=user)
@@ -30,7 +30,6 @@ def submit_query():
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
 	return render_template('recipes.html', res=recipes)
-	#return ','.join(ingred_list) + ':' + ','.join(exclude_list)
 
 @app.route('/save_ingredients', methods=['POST'])
 def save_ingredients():
@@ -47,8 +46,10 @@ def load_ingredients():
 	user = users.get_current_user()
 	if not user:
 		return redirect(users.create_login_url(request.url))
-	# load ingredients from database, redirect browser to correct query params
+	user_ingred = db.load_ingredients_from_user(user)
 	query_params = ''
+	if len(user_ingred.ingred_list) + len(user_ingred.exclude_list) > 0:
+		query_params = '?ingred_list=' + ','.join(user_ingred.ingred_list) + '&exclude_list=' + ','.join(user_ingred.exclude_list)
 	return redirect(url_for('landing') + query_params)
 
 @app.route('/about', methods=['GET'])

@@ -1,10 +1,10 @@
 from google.appengine.ext import ndb
-#from google.cloud import datastore
 
 
-def create_recipe(name, instructions, image_link, ingred_list):
+def create_recipe(name, user, instructions, image_link, ingred_list):
 	recipe = Recipe(
 		name=name,
+		author=user.email(),
 		instructions=instructions,
 		image_link=image_link,
 		ingred_list=ingred_list,
@@ -14,31 +14,30 @@ def create_recipe(name, instructions, image_link, ingred_list):
 	for ingred in ingred_list:
 		q = contains_ingred(ingred)
 		#if ingredient exists, link recipe
-		if(q):
+		if q:
 			q.recipe_list.append(name)
 		#if not, create new ingredient with initial recipe
 		else:
-			q = Ingredient(name=ingred, recipe_list=[name], id = name)
+			q = Ingredient(name=ingred, recipe_list=[name], id = ingred)
 		q.put()
 
 
 def contains_ingred(ingred):
 	q = Ingredient.query(Ingredient.name == ingred)
-	result = q.fetch()
-	return not(result is None) and len(result) > 0;
+	return q.get()
 
 
 def query_ingredients(ingred_list, exclude_list):
-	if (len(ingred_list) == 0 and len(exclude_list) == 0):
-		return None
+	if len(ingred_list) == 0 and len(exclude_list) == 0:
+		return []
 
 	recipes = set()
-	if not(ingred_list is None) and len(ingred_list) > 0:
+	if ingred_list is not None and len(ingred_list) > 0:
 		q = Ingredient.query(Ingredient.name.IN(ingred_list))
 		include_results = q.fetch()
 	else:
 		include_results = list()
-	if not(exclude_list is None) and len(exclude_list) > 0:
+	if exclude_list is not None and len(exclude_list) > 0:
 		p = Ingredient.query(Ingredient.name.IN(exclude_list))
 		exclude_results = p.fetch()
 	else:
@@ -57,13 +56,34 @@ def query_ingredients(ingred_list, exclude_list):
 	return ret
 
 def save_ingredients_to_user(user, ingred_list, exclude_list):
-	pass
+	u = ndb.Key(UserIngredients, user.email()).get()
+	if u:
+		u.ingred_list = ingred_list
+		u.exclude_list = exclude_list
+	else:
+		u = UserIngredients(
+			user_email = user.email(),
+			ingred_list = ingred_list,
+			exclude_list = exclude_list,
+			id = user.email()
+			)
+	u.put()
 
 def load_ingredients_from_user(user):
-	pass
+	u = ndb.Key(UserIngredients, user.email()).get()
+	if u:
+		return u
+	else:
+		return UserIngredients(
+			user_email = user.email(),
+			ingred_list = [],
+			exclude_list = [],
+			id = user.email()
+			)
 
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
+	author = ndb.StringProperty()
 	instructions = ndb.StringProperty()
 	image_link = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)
@@ -71,3 +91,8 @@ class Recipe(ndb.Model):
 class Ingredient(ndb.Model):
 	name = ndb.StringProperty()
 	recipe_list = ndb.StringProperty(repeated=True)
+
+class UserIngredients(ndb.Model):
+	user_email = ndb.StringProperty()
+	ingred_list = ndb.StringProperty(repeated=True)
+	exclude_list = ndb.StringProperty(repeated=True)

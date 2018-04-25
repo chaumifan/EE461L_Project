@@ -4,7 +4,10 @@ import sys
 from google.appengine.api import memcache
 from google.appengine.ext import ndb
 from google.appengine.ext import testbed
+from google.appengine.api import users
 import database as db
+
+DEFAULT_EMAIL = 'user@example.com'
 
 class DatastoreTestCase(unittest.TestCase):
 	def setUp(self):
@@ -13,15 +16,25 @@ class DatastoreTestCase(unittest.TestCase):
 		self.testbed.init_datastore_v3_stub()
 		self.testbed.init_memcache_stub()
 		ndb.get_context().clear_cache()
+		self.populate()
 
 	def tearDown(self):
 		self.testbed.deactivate()
 
-	def populate():
-		db.create_recipe('rice', 'steam them', 'https://rice.com', list(rice, water, salt))
-		db.create_recipe('veggies', 'cook them', 'https://vegies.com', list(veggies, oil))
-		db.create_recipe('potatoes', 'fry them', 'https://fries.com', list(potato, salt, pepper, oil))
-		db.create_recipe('eggs', 'stir them', 'https://eggs.com', list(eggs, milk))
+	def loginUser(self, email=DEFAULT_EMAIL, id='123'):
+		self.testbed.setup_env(
+			user_email=email,
+			user_id=id,
+			user_is_admin='0',
+			overwrite=True)
+
+	def populate(self):
+		self.loginUser()
+		user = users.get_current_user()
+		db.create_recipe('rice', user, 'steam them', 'https://rice.com', ['rice', 'water', 'salt'])
+		db.create_recipe('veggies', user, 'cook them', 'https://vegies.com', ['veggies', 'oil'])
+		db.create_recipe('potatoes', user, 'fry them', 'https://fries.com', ['potato', 'salt', 'pepper', 'oil'])
+		db.create_recipe('eggs', user, 'stir them', 'https://eggs.com', ['eggs', 'milk'])
 
 	#################
 	# TEST CONTAINS #
@@ -34,7 +47,7 @@ class DatastoreTestCase(unittest.TestCase):
 		v5 = db.contains_ingred('pizza');
 		v6 = db.contains_ingred('');
 		expected = [True, True, True, True, False, False]
-		actual = [v1, v2, v3, v4, v5, v6]
+		actual = map(bool, [v1, v2, v3, v4, v5, v6])
 		self.assertListEqual(expected, actual)
 
 	##############
@@ -42,7 +55,7 @@ class DatastoreTestCase(unittest.TestCase):
 	##############
 	def test_query_empty(self):
 		res = db.query_ingredients(list(), list())
-		self.assertEquals(res, None)
+		self.assertEquals(res, [])
 
 	def test_query_simple(self):
 		include = ['rice', 'water']
@@ -51,7 +64,7 @@ class DatastoreTestCase(unittest.TestCase):
 		# TODO: create recipe obj and test equals
 
 	def test_query_multiple(self):
-		include = ['rice, potato']
+		include = ['rice', 'potato']
 		res = db.query_ingredients(include, list())
 		self.assertEquals(len(res), 2)
 		# TODO: create recipe obj and test equals
