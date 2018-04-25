@@ -1,44 +1,85 @@
 {% extends "layout.html" %}
 
+{% block scripts %}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var header = $('#header-img');
+    var backgrounds = new Array(
+      'static/background3.jpg',
+      'static/background2.jpg',
+      'static/background.jpg'
+    );
+
+    var current = 0;
+
+    function nextBackground() {
+        current++;
+        current = current % backgrounds.length;
+        header.css('background', 'linear-gradient(rgba(19,23,18,0.2),rgba(19,23,18,1)), url(' + backgrounds[current] + ')');
+        header.css('background-repeat', 'no-repeat');
+        header.css('background-size', '100%');
+    }
+    setInterval(nextBackground, 6000);
+
+    // header.css('background', backgrounds[0]);
+  });
+</script>
+{% endblock %}
+
 {% block nav_about %}<li class="active"><a>About</a></li>{% endblock %}
 
 {% block body %}
-      <div class=info>
-        <h3>About Pocket Recipes</h3>
-        <br>
-        <p>
-            Have you ever had the problem where you have a full fridge but don't know what to do with all your ingredients?
-            <br>
-            Simply enter in all of the ingredients you want to use and we will curate a list of recipes that fit your fridge.
-            <br>
-            <br>
-            Created by: Calvin Ly, Evonne Ng, Kevin Chau, Hasan Genc, Matt Tawil
-          <div class=instr>
-            <h3>It's as easy as 1, 2, 3!</h3>
-            <ol>
-              <li>Enter all ingredients you want to include in the recipes in the TOP box</li>
-              <li>Enter all ingredients you are allergic to or just don't like in the BOTTOM box</li>
-              <li>Submit Query!</li>
-            </ol>
-          </div>
-          <hr>
-          <div class=tools>
-            <h3>Tools used to create this project</h3>
-            <ul>
-                <li>Google Cloud SDK written in Python 2.7</li>
-                <li>Bootstrap and JQuery for HTML, CSS, and Javascript</li>
-                <li>SQL for database storage and management</li>
-                <li>Testing</li>
-                <ul>
-                    <li>Selenium for UI testing</li>
-                    <li>Controller tests with integration testing (REST)</li>
-                    <li>Python for database queries (Component and Unit testing)</li>
-                </ul>
-            </ul>
-            <p>Source code can be found <a href=https://github.com/chaumifan/EE461L_Project>here</p>
-        </div>
-        </p>
-      </div>
+<div id="header-img" class="jumbotron">
+  <div id="title">
+    <img id="icon" src="{{ url_for('static', filename='icon_burned.png') }}" alt="Card image cap"/>
+    <h1> Pocket Recipes </h1>
+  </div>
+</div>
+<!-- end header section -->
+
+<div id="about" class="jumbotron">
+  <p>Find recipes that are right for your fridge</p>
+</div>
+<!-- end about section -->
+
+<div id=grid class=container style="text-align: center">
+  <h2 style="font-weight: bold">About Pocket Recipes</h2>
+  <br>
+    <h4>
+      Have you ever had the problem where you have a full fridge but don't know what to do with all your ingredients?
       <br>
+      Simply enter in all of the ingredients you want to use and we will curate a list of recipes that fit your fridge.
+      <br>
+      <br>
+    </h4>
+    <p>
+      Created by: Calvin Ly, Evonne Ng, Kevin Chau, Hasan Genc, Matt Tawil
+    </p>  
+    <div class=instr>
+      <br>
+      <h3 style="font-weight: bold">It's as easy as 1, 2, 3!</h3>
+      <br>
+      <h4>1. Enter all ingredients you want to include in the recipes in the TOP box</h4>
+      <h4>2. Enter all ingredients you are allergic to or just don't like in the BOTTOM box</h4>
+      <h4>3. Submit Query!</h4>
+    </div>
+    <br>
+    <div class=instr>
+      <h3>Tools used to create this project</h3>
+          <h5>Google Cloud SDK written in Python 2.7</h5>
+          <h5>Bootstrap and JQuery for HTML, CSS, and Javascript</h5>
+          <h5>SQL for database storage and management</h5>
+          <h5>Testing</h5>
+          <ul>
+              <h5>Selenium for UI testing</h5>
+              <h5>Controller tests with integration testing (REST)</h5>
+              <h5>Python for database queries (Component and Unit testing)</h5>
+          </ul>
+      <p>Source code can be found <a href=https://github.com/chaumifan/EE461L_Project>here</p>
+  </div>
+  </p>
+</div>
+<br>
 <!-- end of grid -->
 {% endblock %}
