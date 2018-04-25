@@ -1,5 +1,5 @@
 from google.appengine.ext import ndb
-from google.cloud import datastore
+#from google.cloud import datastore
 
 
 def create_recipe(name, instructions, image_link, ingred_list):

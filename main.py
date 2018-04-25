@@ -51,6 +51,11 @@ def load_ingredients():
 	query_params = ''
 	return redirect(url_for('landing') + query_params)
 
+@app.route('/about', methods=['GET'])
+def about():
+  	user = users.get_current_user()
+  	return render_template('about.html', user=user)
+
 @app.context_processor
 def utility_processor():
 	def login_url():
