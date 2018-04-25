@@ -198,7 +198,33 @@ form#new-recipe-form input[type=text] {
   border-style: none none groove none; 
 }
 
+/* Inlines the add query button */
 .search {
   display: inline-block;
   white-space: nowrap;
+}
+
+.info {
+  padding:40px;
+  margin: 0 auto;
+  background-color: white;
+  width: 100%;
+}
+
+.info h3 {
+  text-align: center;
+  font-style: italic;
+}
+
+.instr {
+  margin-top: 20px;
+  border-top: 2px solid lightgrey;
+}
+
+.instr li {
+  font-size: 16px;
+}
+
+#usr {
+  text-align: center;
 }

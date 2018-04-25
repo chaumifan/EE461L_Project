@@ -1,4 +1,6 @@
 from google.appengine.ext import ndb
+from google.cloud import datastore
+
 
 def create_recipe(name, instructions, image_link, ingred_list):
 	recipe = Recipe(
@@ -10,12 +12,15 @@ def create_recipe(name, instructions, image_link, ingred_list):
 		)
 	recipe.put()
 	for ingred in ingred_list:
-		pass
-		# TODO
-		# If ingredient is in datastore
-			# grab it and then update the ingred_list
-		# Else
-			# Create new ingredient
+		q = contains_ingred(ingred)
+		#if ingredient exists, link recipe
+		if(q):
+			q.recipe_list.append(name)
+		#if not, create new ingredient with initial recipe
+		else:
+			q = Ingredient(name=ingred, recipe_list=[name], id = name)
+		q.put()
+
 
 def contains_ingred(ingred):
 	q = Ingredient.query(Ingredient.name == ingred)

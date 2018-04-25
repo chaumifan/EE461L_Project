@@ -64,12 +64,41 @@ class ControllerTest(unittest.TestCase):
 		self.assertEquals(result.status_code, 302)
 		self.assertEquals(result.location, 'http://localhost/')
 
-	def testSubmitQuery(self):
-		pass
-
 	def testSaveIngredients(self):
-		pass
+		self.assertFalse(users.get_current_user())
+		result = self.app.post('/save_ingredients', data = {
+				'ingredients[]' : ['burger', 'buns'],
+				'excludes[]' : ['lettuce', 'tomato']
+			})
+		self.assertEquals(result.status_code, 302)
+		self.assertEquals(result.location, 'https://www.google.com/accounts/Login?continue=http%3A//localhost/save_ingredients')
+		self.loginUser()
+		result = self.app.post('/save_ingredients', data = {
+				'ingredients[]' : ['burger', 'buns'],
+				'excludes[]' : ['lettuce', 'tomato']
+			})
+		self.assertEquals(result.status_code, 200)
+		self.assertEquals(result.get_data(True), 'OK')
 
 	def testLoadIngredients(self):
-		pass
+		self.assertFalse(users.get_current_user())
+		result = self.app.get('/load_ingredients')
+		self.assertEquals(result.status_code, 302)
+		self.assertEquals(result.location, 'https://www.google.com/accounts/Login?continue=http%3A//localhost/load_ingredients')
+		self.loginUser()
+		result = self.app.get('/load_ingredients')
+		self.assertEquals(result.status_code, 302)
+		self.assertEquals(result.location, 'http://localhost/')
+
+	def testSaveAndLoadIngredients(self):
+		self.loginUser()
+		result = self.app.post('/save_ingredients', data = {
+				'ingredients[]' : ['burger', 'buns'],
+				'excludes[]' : ['lettuce', 'tomato']
+			})
+		self.assertEquals(result.status_code, 200)
+		self.assertEquals(result.get_data(True), 'OK')
+		result = self.app.get('/load_ingredients')
+		self.assertEquals(result.status_code, 302)
+		self.assertEquals(result.location, 'http://localhost/?ingred_list=burger,buns&exclude_list=lettuce,tomato')
 	
