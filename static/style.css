@@ -197,3 +197,8 @@ form#new-recipe-form input[type=text] {
   color: black;
   border-style: none none groove none; 
 }
+
+.search {
+  display: inline-block;
+  white-space: nowrap;
+}
