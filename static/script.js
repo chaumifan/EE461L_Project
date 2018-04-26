@@ -198,6 +198,14 @@ $(function(){
         }
     });
 
+    $('#upload_list').on('click', 'span.remove', function (e) {
+        // alert("hey")
+        var upload_ingred_list = document.getElementById('upload_list');
+        var ingred = this.parentNode.textContent;
+        local_ingred_set.delete(ingred);
+        upload_ingred_list.removeChild(this.parentNode);
+    });
+
     $('#uploadRecipe').on('click', function(e) {
         var name_input = $(document.getElementById('recipeName')).find('input');
         var name = name_input.val();
