@@ -255,3 +255,7 @@ form#new-recipe-form input[type=text] {
 .greet {
   text-align: center;
 }
+
+.upload {
+  padding: 60px;
+}

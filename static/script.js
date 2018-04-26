@@ -3,6 +3,8 @@ var local_exclude_set = new Set();
 var ingredRegex = new RegExp("([?&])ingred_list=.*?(&|$)", "i");
 var excludeRegex = new RegExp("([?&])exclude_list=.*?(&|$)", "i");
 
+var local_ingred_upload_set = new Set();
+
 function htmlToElement(html) {
     var template = document.createElement('template');
     template.innerHTML = html.trim();
@@ -181,5 +183,57 @@ $(function(){
         $.post('save_ingredients', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
             alert("Ingredients saved to your account!");
         });
+    });
+
+    $('#addIngredientUpload').submit(function(e) {
+        // alert("hello world");
+        e.preventDefault();
+        var ingred_input = $(this).find('input');
+        var ingred = ingred_input.val().toLowerCase();
+        ingred_input.val('');
+        if (ingred.length > 0 && !local_ingred_upload_set.has(ingred)) {
+            var ingred_list = document.getElementById('upload_list');
+            ingred_list.appendChild(createHTML(ingred));
+            local_ingred_upload_set.add(ingred);
+        }
+    });
+
+    $('#uploadRecipe').on('click', function(e) {
+        var name_input = $(document.getElementById('recipeName')).find('input');
+        var name = name_input.val().toLowerCase();
+        var link_input = $(document.getElementById('recipeLink')).find('input');
+        var link = link_input.val().toLowerCase();
+        var desc_input = $(document.getElementById('recipeDescription')).find('input');
+        var desc = desc_input.val().toLowerCase();
+        var no_name = name.length <= 0; 
+        var no_link = link.length <= 0;
+        var no_desc =  desc.length <= 0;
+        var no_ingred = local_ingred_upload_set.size == 0;
+        var no_check = document.getElementById('check').checked == false; 
+
+        if (no_name || no_link || no_desc || no_ingred || no_check) {
+            var msg = "Please fill out missing items before submitting: \n\n";
+            if (no_name) {
+                msg = msg + "Missing recipe name \n";
+            }
+            if (no_link) {
+                msg = msg + "Missing link to recipe \n";
+            }
+            if (no_desc) {
+                msg = msg + "Missing description \n";
+            }
+            if (no_ingred) {
+                msg = msg + "Missing ingredient list \n";
+            }
+            if (no_check) {
+                msg = msg + "Please agree to our terms and conditions \n";
+            }
+            alert(msg);
+        } else {
+            var ingred_list = Array.from(local_ingred_upload_set);
+            $.post('create', {'ingredients[]': ingred_list, 'instructions':link, 'name':name}, function(data) {
+                alert("Thank you for uploading!");
+            });
+        }
     });
 });

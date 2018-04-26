@@ -25,6 +25,7 @@
     // header.css('background', backgrounds[0]);
   });
 </script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 
 {% block nav_create %}<li class="active"><a>Upload Creation</a></li>{% endblock %}
@@ -47,53 +48,49 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="panel panel-default">
-        <div class="panel-body">
-          <form id="new-recipe-form">
-            <div class="panel-title">Recipe Name</div>
-            <input class="input" placeholder="Name" id="recipe-name" type="text" >
-            <br/>
-            <br/>
-  
-            <div class="panel-title">Recipe Link</div>
-            <input class="input" placeholder="Link" id="recipe-link" type="text" >
-            <br/>
-            <br/>
-
-            <div class="panel-title">Brief Description</div>
-            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-link" type="text" >
-            <br/>
-            <br/>
-
-            <div class="panel-title">Upload Photo</div>
-            <input class="input" id="recipe-photo" type="file" >
-            <br/>
-
-            <div class="panel-title">Ingredients</div>
-            <input class="input" placeholder="Specify which ingredients are required" type="text" >
-            <br/>
-            <br/>
-
-            <!-- dummy ingredient list -->
-            <div class="container ingred-list include">
-              <ul class="list-group">
-                <li class="list-group-item">Tomato
-                  <span class="remove">
-                    <span class="btn btn-sm btn-default" onclick="">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </span>
-                  </span>
-                </li>
-                <li class="list-group-item">Potato
-                  <span class="remove">
-                    <span class="btn btn-sm btn-default" onclick="">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-
+        <div class="upload panel-body">
+          <form id="recipeName">
+            <h3>Recipe Name</h3>
+            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" >
           </form>
+          <br/>
+          <br/>
+          
+          <form id="recipeLink">
+            <h3>Link to Recipe</h3>
+            <input class="input" placeholder="Example: https://www.pad_thai" id="recipe-link" type="text" >
+          </form>
+          <br/>
+          <br/>
+          
+          <form id="recipeDescription">
+            <h3>Brief Description</h3>
+            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-link" type="text" >
+          </form>
+          <br/>
+          <br/>
+
+          <form id="recipePhoto">
+            <h3>Upload Photo</h3>
+            <input class="input" id="recipe-photo" type="file" >
+          </form>
+          <br/>
+          <br/>
+
+          <h3>Ingredients</h3>
+           <!--  <input class="input_recipe" placeholder="Specify which ingredients are required" type="text" > -->
+          <form id="addIngredientUpload">
+            <input class="input_upload" placeholder="Specify which ingredients are required" type="text">
+            <span><button class="plus_btn btn-link" input type="submit">+</button></span>
+          </form>
+          <br/>
+
+          <!-- dummy ingredient list -->
+          <div class="container ingred-list include">
+            <ul class="list-group" id="upload_list">
+            <!-- where excluded ingredients get inserted in -->
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -106,11 +103,11 @@
         <div class="panel-body">
           <div class="panel-text">You know the rules. If you upload it, we own it.</div>
           <br/>
-          <input type="checkbox" name="accept-terms"/>
+          <input id="check" type="checkbox" name="accept-terms"/>
           <label for="accept-terms">I accept these onerous terms and conditions</label>
           <br/>
           <br/>
-          <div class="submit btn btn-sm btn-default" onclick="">Submit Recipe</div>
+          <div class="submit btn btn-sm btn-default" id="uploadRecipe">Submit Recipe</div>
         </div>
       </div>
     
