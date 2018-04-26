@@ -83,13 +83,13 @@ class ControllerTest(unittest.TestCase):
 
 	def testLoadIngredients(self):
 		self.assertFalse(users.get_current_user())
-		result = self.app.get('/load_ingredients')
+		result = self.app.post('/load_ingredients')
 		self.assertEquals(result.status_code, 302)
 		self.assertEquals(result.location, 'https://www.google.com/accounts/Login?continue=http%3A//localhost/load_ingredients')
 		self.loginUser()
-		result = self.app.get('/load_ingredients')
-		self.assertEquals(result.status_code, 302)
-		self.assertEquals(result.location, 'http://localhost/')
+		result = self.app.post('/load_ingredients')
+		self.assertEquals(result.status_code, 200)
+		self.assertEquals(result.get_data(), '{"exclude_list": [], "ingred_list": []}')
 
 	def testSaveAndLoadIngredients(self):
 		self.loginUser()
@@ -99,7 +99,7 @@ class ControllerTest(unittest.TestCase):
 			})
 		self.assertEquals(result.status_code, 200)
 		self.assertEquals(result.get_data(True), 'OK')
-		result = self.app.get('/load_ingredients')
-		self.assertEquals(result.status_code, 302)
-		self.assertEquals(result.location, 'http://localhost/?ingred_list=burger,buns&exclude_list=lettuce,tomato')
+		result = self.app.post('/load_ingredients')
+		self.assertEquals(result.status_code, 200)
+		self.assertEquals(result.get_data(), '{"exclude_list": ["lettuce", "tomato"], "ingred_list": ["burger", "buns"]}')
 	
