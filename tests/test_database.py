@@ -31,10 +31,10 @@ class DatastoreTestCase(unittest.TestCase):
 	def populate(self):
 		self.loginUser()
 		user = users.get_current_user()
-		db.create_recipe('rice', user, 'steam them', 'https://rice.com', ['rice', 'water', 'salt'])
-		db.create_recipe('veggies', user, 'cook them', 'https://vegies.com', ['veggies', 'oil'])
-		db.create_recipe('potatoes', user, 'fry them', 'https://fries.com', ['potato', 'salt', 'pepper', 'oil'])
-		db.create_recipe('eggs', user, 'stir them', 'https://eggs.com', ['eggs', 'milk'])
+		db.create_recipe('rice', user, 'steamed rice', 'https://howtosteamrice.com', 'https://pic-of-rice.com', ['rice', 'water', 'salt'])
+		db.create_recipe('veggies', user, 'cooked veggies', 'https://howtocookveggies.com', 'https://pic-of-veggies.com', ['veggies', 'oil'])
+		db.create_recipe('potatoes', user, 'fried potatoes', 'https://fries.com', 'https://pic-of-fries.com', ['potato', 'salt', 'pepper', 'oil'])
+		db.create_recipe('eggs', user, 'scrambled eggs', 'https://eggs.com', 'https://pic-of-eggs.com', ['eggs', 'milk'])
 
 	#################
 	# TEST CONTAINS #

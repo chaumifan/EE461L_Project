@@ -48,7 +48,8 @@ class ControllerTest(unittest.TestCase):
 		self.assertFalse(users.get_current_user())
 		result = self.app.post('/create', data = {
 				'name' : 'Hamburger',
-				'instructions' : 'Grill it up',
+				'description' : 'The American Dream',
+				'instructions' : 'https://hamburger.com',
 				'image_link' : 'www.google.com',
 				'ingredients[]' : ['burger', 'buns']
 			})
@@ -57,12 +58,12 @@ class ControllerTest(unittest.TestCase):
 		self.loginUser()
 		result = self.app.post('/create', data = {
 				'name' : 'Hamburger',
-				'instructions' : 'Grill it up',
+				'description' : 'The American Dream',
+				'instructions' : 'https://hamburger.com',
 				'image_link' : 'www.google.com',
 				'ingredients[]' : ['burger', 'buns']
 			})
-		self.assertEquals(result.status_code, 302)
-		self.assertEquals(result.location, 'http://localhost/')
+		self.assertEquals(result.status_code, 200)
 
 	def testSaveIngredients(self):
 		self.assertFalse(users.get_current_user())

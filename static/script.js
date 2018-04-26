@@ -200,11 +200,11 @@ $(function(){
 
     $('#uploadRecipe').on('click', function(e) {
         var name_input = $(document.getElementById('recipeName')).find('input');
-        var name = name_input.val().toLowerCase();
+        var name = name_input.val();
         var link_input = $(document.getElementById('recipeLink')).find('input');
         var link = link_input.val().toLowerCase();
         var desc_input = $(document.getElementById('recipeDescription')).find('input');
-        var desc = desc_input.val().toLowerCase();
+        var desc = desc_input.val()
         var no_name = name.length <= 0; 
         var no_link = link.length <= 0;
         var no_desc =  desc.length <= 0;
@@ -231,8 +231,13 @@ $(function(){
             alert(msg);
         } else {
             var ingred_list = Array.from(local_ingred_upload_set);
-            $.post('create', {'ingredients[]': ingred_list, 'instructions':link, 'name':name}, function(data) {
+            $.post('create', {'ingredients[]': ingred_list, 'instructions':link, 'name':name, 'description':desc}, function(data) {
                 alert("Thank you for uploading!");
+                window.location.replace('/');
+
+            })
+            .fail(function(data) {
+                alert(data.responseText);
             });
         }
     });

@@ -1,10 +1,13 @@
 from google.appengine.ext import ndb
 
 
-def create_recipe(name, user, instructions, image_link, ingred_list):
+def create_recipe(name, user, description, instructions, image_link, ingred_list):
+	if ndb.Key(Recipe, name).get():
+		return False
 	recipe = Recipe(
 		name=name,
 		author=user.email(),
+		description=description,
 		instructions=instructions,
 		image_link=image_link,
 		ingred_list=ingred_list,
@@ -20,6 +23,7 @@ def create_recipe(name, user, instructions, image_link, ingred_list):
 		else:
 			q = Ingredient(name=ingred, recipe_list=[name], id = ingred)
 		q.put()
+	return True
 
 
 def contains_ingred(ingred):
@@ -84,6 +88,7 @@ def load_ingredients_from_user(user):
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
 	author = ndb.StringProperty()
+	description=ndb.StringProperty()
 	instructions = ndb.StringProperty()
 	image_link = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)

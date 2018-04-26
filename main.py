@@ -16,11 +16,14 @@ def create():
 		return redirect(users.create_login_url(request.url))
 	if request.method == 'POST':
 		name = request.form['name']
+		description = request.form['description']
 		instructions = request.form['instructions']
-		image_link = request.form['image_link']
+		#image_link = request.form['image_link']
 		ingred_list = request.form.getlist('ingredients[]')
-		db.create_recipe(name, user, instructions, image_link, ingred_list)
-		return redirect(url_for('landing'))
+		if db.create_recipe(name, user, description, instructions, '', ingred_list):
+			return 'OK' #Return value doesn't matter
+		else:
+			return 'Recipe name is not unique! Please change your recipe name.', 400
 	else:
 		return render_template('create.html', user=user)
 
