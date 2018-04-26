@@ -149,7 +149,7 @@ input[type=text] {
   text-align: center;
   height: 30px;
   border: 0;
-  width: 93%;
+  width: 100%;
   box-shadow: -0 4px 2px -2px #ebebeb; /*default grey*/
   -webkit-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
@@ -232,18 +232,19 @@ form#new-recipe-form input[type=text] {
 
 .plus_btn {
   background-color: white;
-  float: right;
-  box-shadow: 3px 3px 8px darkgrey; /*default grey*/
+  border:none;
+  color: white;
+  width: 0px;
+  height: 0px;
+/*  float: right;
+  margin-right: 5px;
+  box-shadow: 3px 3px 8px darkgrey; 
   font-size: 17px;
   border: none;
   outline: none;
   text-decoration: none !important;
   font-weight: bold !important;
-  color: darkgrey !important;
-}
-
-.plus_btn:hover {
-  background-color: lightgrey;
+  color: darkgrey !important;*/
 }
 
 .trio {
