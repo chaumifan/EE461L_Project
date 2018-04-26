@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from google.appengine.api import users
 import database as db
+import json
 
 app = Flask(__name__)
 
@@ -44,16 +45,13 @@ def save_ingredients():
 	db.save_ingredients_to_user(user, ingred_list, exclude_list)
 	return 'OK' #Return value doesn't matter
 
-@app.route('/load_ingredients', methods=['GET'])
+@app.route('/load_ingredients', methods=['POST'])
 def load_ingredients():
 	user = users.get_current_user()
 	if not user:
 		return redirect(users.create_login_url(request.url))
 	user_ingred = db.load_ingredients_from_user(user)
-	query_params = ''
-	if len(user_ingred.ingred_list) + len(user_ingred.exclude_list) > 0:
-		query_params = '?ingred_list=' + ','.join(user_ingred.ingred_list) + '&exclude_list=' + ','.join(user_ingred.exclude_list)
-	return redirect(url_for('landing') + query_params)
+	return json.dumps({'ingred_list': user_ingred.ingred_list, 'exclude_list': user_ingred.exclude_list})
 
 @app.route('/about', methods=['GET'])
 def about():
