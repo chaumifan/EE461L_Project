@@ -120,6 +120,24 @@ function loadExcludes() {
     }
 }
 
+function addIngredientOnLandingPage(ingred) {
+    if (ingred.length > 0 && !local_ingred_set.has(ingred) && !local_exclude_set.has(ingred)) {
+        var ingred_list = document.getElementById('ingred_list');
+        ingred_list.appendChild(createHTML(ingred));
+        updateURL(addToIngredListQuery(ingred));
+        local_ingred_set.add(ingred);
+    }
+}
+
+function addExcludeOnLandingPage(exclude) {
+    if (exclude.length > 0 && !local_ingred_set.has(exclude) && !local_exclude_set.has(exclude)) {
+        var exclude_list = document.getElementById('exclude_list');
+        exclude_list.appendChild(createHTML(exclude));
+        updateURL(addToExcludeListQuery(exclude));
+        local_exclude_set.add(exclude);
+    }
+}
+
 $(function(){
     // Load ingredients and excludes from query string
     loadIngredients();
@@ -131,12 +149,7 @@ $(function(){
         var ingred_input = $(this).find('input');
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
-        if (ingred.length > 0 && !local_ingred_set.has(ingred) && !local_exclude_set.has(ingred)) {
-            var ingred_list = document.getElementById('ingred_list');
-            ingred_list.appendChild(createHTML(ingred));
-            updateURL(addToIngredListQuery(ingred));
-            local_ingred_set.add(ingred);
-        }
+        addIngredientOnLandingPage(ingred);
     });
 
     $('#addExclude').submit(function(e) {
@@ -144,12 +157,7 @@ $(function(){
         var exclude_input = $(this).find('input');
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
-        if (exclude.length > 0 && !local_ingred_set.has(exclude) && !local_exclude_set.has(exclude)) {
-            var exclude_list = document.getElementById('exclude_list');
-            exclude_list.appendChild(createHTML(exclude));
-            updateURL(addToExcludeListQuery(exclude));
-            local_exclude_set.add(exclude);
-        }
+        addExcludeOnLandingPage(exclude);
     });
 
     $('#ingred_list').on('click', 'span.remove', function (e) {
@@ -185,6 +193,14 @@ $(function(){
         });
     });
 
+    $('#loadQuery').on('click', function (e) {
+        $.post("/load_ingredients", function(data) {
+            data = $.parseJSON(data);
+            data.ingred_list.forEach(addIngredientOnLandingPage);
+            data.exclude_list.forEach(addExcludeOnLandingPage);
+        });
+    });
+
     $('#addIngredientUpload').submit(function(e) {
         // alert("hello world");
         e.preventDefault();
@@ -199,7 +215,6 @@ $(function(){
     });
 
     $('#upload_list').on('click', 'span.remove', function (e) {
-        // alert("hey")
         var upload_ingred_list = document.getElementById('upload_list');
         var ingred = this.parentNode.textContent;
         local_ingred_set.delete(ingred);
