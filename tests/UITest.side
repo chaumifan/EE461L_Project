@@ -39,21 +39,21 @@
                "id":"ada10c74-82c0-489f-aa87-7350d1210775",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"19,10"
             },
             {
                "id":"280a7330-1d18-4a6d-98a3-cac4e4a372f5",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"2fb18bae-e49b-4b7a-9336-510aadea7106",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -74,7 +74,7 @@
                "id":"c3adfd2d-2ae9-4f44-8b22-c5cfca6dddf4",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"17,18"
             },
             {
@@ -122,21 +122,21 @@
                "id":"4a3b2d8b-c501-4bdc-a1f0-556def7773e4",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"13,16"
             },
             {
                "id":"c1bc0dc8-a6aa-4aea-bc31-141cba695624",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"e2d5f553-baeb-49ab-bbc1-45451f5a93c9",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -164,21 +164,21 @@
                "id":"e1da7981-f699-4f1c-92be-3bb505f2de95",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"12,14"
             },
             {
                "id":"7d69f823-ecea-47b2-aba9-86024758bef9",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"3a47f3f7-807f-477a-a45f-4a23283b52f8",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -199,7 +199,7 @@
                "id":"aa524dad-7efc-4be4-8a67-a70568dac290",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"13,12"
             },
             {
@@ -261,7 +261,7 @@
                "id":"b6c75ebd-cf8f-49b7-88bf-a845cc3d0fe8",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"4,19"
             },
             {
@@ -282,7 +282,7 @@
                "id":"12956f25-df1d-4248-9fa0-cebcacdb7c06",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"12,9"
             },
             {
@@ -303,7 +303,7 @@
                "id":"91e59ef4-4c83-464e-963b-f9eadadd45a4",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"2,20"
             },
             {
@@ -324,7 +324,7 @@
                "id":"6a366f7d-4bea-4088-9f64-b120974b0396",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"19,5"
             },
             {
@@ -345,7 +345,7 @@
                "id":"25dbecc3-7904-4caf-a956-70f0f2f3dd51",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"20,10"
             },
             {
@@ -421,7 +421,7 @@
                "id":"a3e01020-1f90-4c60-bc69-6d7a6c03ffb5",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"19,11"
             },
             {
@@ -442,7 +442,7 @@
                "id":"160354e2-e8a9-4040-b936-d524b3616516",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"18,6"
             },
             {
@@ -463,7 +463,7 @@
                "id":"eab2bf0a-6cc4-496b-a8c0-71b3503d4bdb",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"17,11"
             },
             {
@@ -491,7 +491,7 @@
                "id":"b23fd25c-ae04-4930-8c8b-cf57e4ccbfb4",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"13,12"
             },
             {
@@ -512,7 +512,7 @@
                "id":"5fca4361-a01c-4055-aa94-c329b967dc0c",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"19,13"
             },
             {
@@ -588,7 +588,7 @@
                "id":"1df38531-78ae-47fc-bbae-c5f5f4e0386e",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"8,14"
             },
             {
@@ -609,7 +609,7 @@
                "id":"77b18c64-2cf2-461c-971a-cc33c3194335",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"17,16"
             },
             {
@@ -630,7 +630,7 @@
                "id":"c0187894-dc4c-4ab2-82f0-a782cf17a712",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"18,3"
             },
             {
@@ -651,21 +651,21 @@
                "id":"252e1fe3-2f0a-4c97-8d62-77084c790101",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"17,9"
             },
             {
                "id":"495cd80d-58e1-4948-9b0e-be15674e942f",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"2430b4cf-8d12-4da1-9c69-21da5aa1a4ac",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -734,7 +734,7 @@
                "id":"ea046cc8-ab7c-440e-8d10-af29a654fb3d",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"20,11"
             },
             {
@@ -755,7 +755,7 @@
                "id":"4ccaf2fe-3bfb-4eff-89fd-1c52f77fb4f1",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"14,13"
             },
             {
@@ -776,21 +776,21 @@
                "id":"961057f4-73a5-4176-91f9-a5f96b29f89b",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"19,13"
             },
             {
                "id":"2d78cbb0-c1ee-43e9-bc4b-409bde42f275",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"12d06bfb-08f3-4784-a808-656274d450b2",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -811,7 +811,7 @@
                "id":"40db6266-baf4-405e-ad43-c625339a6cbf",
                "comment":"",
                "command":"clickAt",
-               "target":"css=button[type=\"submit\"]",
+               "target":"css=span > button.plus_btn.btn-link",
                "value":"7,16"
             },
             {
@@ -832,21 +832,21 @@
                "id":"fcf88abf-25bb-4784-ac88-8c74270777d8",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"21,7"
             },
             {
                "id":"f901f02b-3658-48d8-90b8-2b0ae02bf53a",
                "comment":"",
                "command":"mouseOver",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
                "id":"842a0b59-0745-4943-ae85-334ff41e45c0",
                "comment":"",
                "command":"mouseOut",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":""
             },
             {
@@ -867,7 +867,7 @@
                "id":"86782950-abfc-47b7-aaf3-b67341c5c7dd",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"25,8"
             },
             {
@@ -888,7 +888,7 @@
                "id":"171d7079-fb67-4a5c-8a40-7c2064d5fd16",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"20,7"
             },
             {
@@ -909,7 +909,7 @@
                "id":"9aee2208-41bf-400b-bb1d-3d07fc7e4e43",
                "comment":"",
                "command":"clickAt",
-               "target":"css=#addExclude > button[type=\"submit\"]",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"4,13"
             },
             {
@@ -1017,6 +1017,20 @@
                "value":"Logout"
             },
             {
+               "id":"0257433f-ac1e-4214-87f5-425e11c9433e",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=div.panel-body",
+               "value":""
+            },
+            {
+               "id":"f2254baa-70b4-474a-a0d9-41b5331c361b",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"//div[@id='grid']/div/div[2]/div/div[2]",
+               "value":""
+            },
+            {
                "id":"54764bb2-6071-41d6-9cb2-e9feee87a6c3",
                "comment":"",
                "command":"assertText",
@@ -1026,9 +1040,9 @@
             {
                "id":"6ebc3843-3861-4549-bcbd-52b0eaaa87da",
                "comment":"",
-               "command":"assertText",
+               "command":"assertElementPresent",
                "target":"id=recipe-photo",
-               "value":"Browse..."
+               "value":""
             },
             {
                "id":"c8836df0-a832-4300-a0bb-5d46240802b9",
@@ -1049,6 +1063,20 @@
                "command":"open",
                "target":"/create",
                "value":""
+            },
+            {
+               "id":"4e9b4a37-edf6-4aad-843e-1b9a3c6764df",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Welcome, test@example.com!')]",
+               "value":"Welcome, test@example.com!"
+            },
+            {
+               "id":"76a7189e-0fdd-4c97-b09c-48d0e7a594b4",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Logout')]",
+               "value":"Logout"
             },
             {
                "id":"4c485b0a-3a71-4399-a356-8599e36e9022",
@@ -1072,6 +1100,151 @@
                "value":"Login"
             }
          ]
+      },
+      {
+         "id":"0de2b521-a80e-43d8-bd2b-5fca499a8f42",
+         "name":"UITest4NavigationAbout",
+         "commands":[
+            {
+               "id":"1ac059e1-fca3-48b6-8325-0cb1d4dd0a2f",
+               "comment":"",
+               "command":"open",
+               "target":"/",
+               "value":""
+            },
+            {
+               "id":"9c5c2330-4f4e-41cf-91ab-d47a56f5318c",
+               "comment":"",
+               "command":"clickAt",
+               "target":"//a[contains(text(),'About')]",
+               "value":"21,36"
+            },
+            {
+               "id":"cad12a7a-0db5-4a0e-a02a-a3737e2ddc18",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"id=grid",
+               "value":""
+            },
+            {
+               "id":"f6651133-f73f-4452-93fc-a7f248968b65",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=h2",
+               "value":"About Pocket Recipes"
+            },
+            {
+               "id":"1d69cf70-2897-4e49-a5a6-fddab3d84118",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=div.instr",
+               "value":""
+            },
+            {
+               "id":"255a5a02-65dd-47c4-a66e-2a8ec6bef8ca",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=h3",
+               "value":"It's easy as 1,2,3!"
+            },
+            {
+               "id":"239a22f6-fd48-4e35-9237-e846910d6d0f",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"//div[@id='grid']/div[2]",
+               "value":""
+            },
+            {
+               "id":"2f7fcb26-13aa-47c2-92f2-9cf9a1b1ee71",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"//div[@id='grid']/div[2]/h3",
+               "value":"Tools used to create this project"
+            }
+         ]
+      },
+      {
+         "id":"4732c813-2e44-442f-9ae2-835e24eea123",
+         "name":"UITest4NavigationLogin",
+         "commands":[
+            {
+               "id":"9b67be30-4f93-4619-bb2f-946388905186",
+               "comment":"",
+               "command":"open",
+               "target":"/",
+               "value":""
+            },
+            {
+               "id":"23bde84c-9d25-4831-a075-d63690585a48",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Welcome, guest!')]",
+               "value":"Welcome, guest!"
+            },
+            {
+               "id":"0a73145f-ba5c-4035-8fcd-9e7236e596b4",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Login')]",
+               "value":"Login"
+            },
+            {
+               "id":"a83db894-60e6-4ef5-bc76-0507a678d0ae",
+               "comment":"",
+               "command":"clickAt",
+               "target":"//a[contains(text(),'Login')]",
+               "value":"50,30"
+            },
+            {
+               "id":"166f6383-8116-4a1f-8d8d-9abbb08a65dc",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=form > div",
+               "value":""
+            },
+            {
+               "id":"8f153a53-4bb6-4702-bcc5-9c1a17f6ade4",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=h3",
+               "value":"Not logged in"
+            },
+            {
+               "id":"346d1f5e-cc18-457b-a87e-3d498494a234",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=p",
+               "value":""
+            },
+            {
+               "id":"47bd3d8c-bcc4-44b1-9316-700ba9e3235d",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"id=submit-login",
+               "value":""
+            },
+            {
+               "id":"bce69138-ca3d-49b4-b2a1-6de6cad050e8",
+               "comment":"",
+               "command":"clickAt",
+               "target":"id=submit-login",
+               "value":"44,12"
+            },
+            {
+               "id":"3f1a2153-bd22-400c-b3fb-00bba4693cd9",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Welcome, test@example.com!')]",
+               "value":"Welcome, test@example.com!"
+            },
+            {
+               "id":"09ae2c39-3cd3-4a9a-961e-d7708bc3173a",
+               "comment":"",
+               "command":"assertText",
+               "target":"//a[contains(text(),'Logout')]",
+               "value":"Logout"
+            }
+         ]
       }
    ],
    "suites":[
@@ -1079,16 +1252,19 @@
          "id":"cd1865fb-0f19-420f-9b30-b3cbca97309b",
          "name":"Default Suite",
          "tests":[
-            "96cacad0-b035-4bb5-a3ec-2110c013e7e7",
             "86827764-c783-4d80-8fb9-52e1c67d34c9",
+            "96cacad0-b035-4bb5-a3ec-2110c013e7e7",
             "9f667bf2-0cd4-40f4-ac32-e5b28def95b5",
             "0b119800-63c9-461f-b3ca-c91f433fdf87",
             "911f9b7c-4ccb-4781-b2ac-b8711efbd34f",
-            "c232208f-41cc-41df-87cd-ac4a79fb2040"
+            "c232208f-41cc-41df-87cd-ac4a79fb2040",
+            "f259078a-f40a-45d6-9d83-e8d1875336e5",
+            "9605e582-9a38-4718-8dcd-717448980d6f"
          ]
       }
    ],
    "urls":[
+      "http://localhost:8080",
       "http://localhost:8080",
       "http://localhost:8080",
       "http://localhost:8080",

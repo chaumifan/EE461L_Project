@@ -1,0 +1,21 @@
+{% for r in res %}
+      <div class="col-sm-3">
+        <!-- start of recipe panels -->
+        <div class="panel panel-default recipes">
+          <!-- dummy individual panels -->
+          <div class="panel-heading">{{r.name}}</div>
+          <img class="panel-img-top" src="{{r.image_link}}" alt="Card image cap">
+          <div class="panel-body">
+            <h2 class="panel-title">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </h2>
+            <p class="panel-text">{{r.description}}</p>
+            <a href="{{r.instructions}}" target="_blank" class="link btn btn-default">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+{% endfor %}
