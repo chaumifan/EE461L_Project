@@ -222,17 +222,16 @@ $(function(){
     });
 
     $('#uploadRecipe').on('click', function(e) {
-        var name_input = $(document.getElementById('recipeName')).find('input');
-        var name = name_input.val();
-        var link_input = $(document.getElementById('recipeLink')).find('input');
-        var link = link_input.val().toLowerCase();
-        var desc_input = $(document.getElementById('recipeDescription')).find('input');
-        var desc = desc_input.val()
+        var name = $('#recipe-name').val()
+        var link = $('#recipe-link').val().toLowerCase();
+        var desc = $('#recipe-description').val();
+        var image = $('#recipe-photo').val();
         var no_name = name.length <= 0; 
         var no_link = link.length <= 0;
         var no_desc =  desc.length <= 0;
+        var no_image = image.length <= 0;
         var no_ingred = local_ingred_upload_set.size == 0;
-        var no_check = document.getElementById('check').checked == false; 
+        var no_check = document.getElementById('check').checked == false;
 
         if (no_name || no_link || no_desc || no_ingred || no_check) {
             var msg = "Please fill out missing items before submitting: \n\n";
@@ -245,6 +244,9 @@ $(function(){
             if (no_desc) {
                 msg = msg + "Missing description \n";
             }
+            if (no_image) {
+                msg = msg + "Missing image \n";
+            }
             if (no_ingred) {
                 msg = msg + "Missing ingredient list \n";
             }
@@ -254,13 +256,27 @@ $(function(){
             alert(msg);
         } else {
             var ingred_list = Array.from(local_ingred_upload_set);
-            $.post('create', {'ingredients[]': ingred_list, 'instructions':link, 'name':name, 'description':desc}, function(data) {
-                alert("Thank you for uploading!");
-                window.location.replace('/');
+            $('#recipe-ingredients').val(ingred_list);
 
-            })
-            .fail(function(data) {
-                alert(data.responseText);
+            // Submit form (with picture attached)
+            // $('#recipeForm')[0].submit();
+            var f =  document.getElementById("recipeForm");
+            var formData = new FormData(f);
+
+            $.ajax({
+                type: 'POST',
+                url: '/create',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    alert("Thank you for uploading!");
+                    window.location.replace('/');
+                },
+                error: function(data) {
+                    alert(data.responseText);
+                }
             });
         }
     });

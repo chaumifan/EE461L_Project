@@ -49,33 +49,33 @@
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="upload panel-body">
-          <form id="recipeName">
+          <form id="recipeForm" enctype="multipart/form-data" method="post">
             <h3>Recipe Name</h3>
-            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" >
-          </form>
-          <br/>
-          <br/>
+            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" name="name">
+            <br/>
+            <br/>
+            <br/>
           
-          <form id="recipeLink">
             <h3>Link to Recipe</h3>
-            <input class="input" placeholder="Example: https://www.pad_thai.com/recipe" id="recipe-link" type="text" >
-          </form>
-          <br/>
-          <br/>
+            <input class="input" placeholder="Example: https://www.pad_thai.com/recipe" id="recipe-link" type="text" name="instructions">
+            <br/>
+            <br/>
+            <br/>
           
-          <form id="recipeDescription">
             <h3>Brief Description</h3>
-            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-link" type="text" >
-          </form>
-          <br/>
-          <br/>
+            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-description" type="text" name="description">
+            <br/>
+            <br/>
+            <br/>
 
-          <form id="recipePhoto">
             <h3>Upload Photo</h3>
-            <input class="input" id="recipe-photo" type="file" >
+            <input class="input" id="recipe-photo" type="file" name="photo">
+            <br/>
+            <br/>
+            <br/>
+
+            <input id="recipe-ingredients" type="hidden" name="ingredients[]">
           </form>
-          <br/>
-          <br/>
 
           <h3>Ingredients</h3>
            <!--  <input class="input_recipe" placeholder="Specify which ingredients are required" type="text" > -->

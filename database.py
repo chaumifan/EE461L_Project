@@ -1,15 +1,20 @@
 from google.appengine.ext import ndb
 
+import sys
 
-def create_recipe(name, user, description, instructions, image_link, ingred_list):
+def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
+
+	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
+	image.put()
+
 	recipe = Recipe(
 		name=name,
 		author=user.email(),
 		description=description,
 		instructions=instructions,
-		image_link=image_link,
+		image_link='/img/{}'.format(name),
 		ingred_list=ingred_list,
 		id=name
 		)
@@ -85,6 +90,9 @@ def load_ingredients_from_user(user):
 			id = user.email()
 			)
 
+def get_image(recipe_name):
+	return ndb.Key(Image, recipe_name).get()
+
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
 	author = ndb.StringProperty()
@@ -101,3 +109,7 @@ class UserIngredients(ndb.Model):
 	user_email = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)
 	exclude_list = ndb.StringProperty(repeated=True)
+
+class Image(ndb.Model):
+	blob = ndb.BlobProperty()
+	mimetype = ndb.StringProperty()
