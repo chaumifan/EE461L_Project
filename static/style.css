@@ -1,3 +1,8 @@
+body {
+  /*font-family: 'Dosis', sans-serif !important; */
+  /*font-family: 'Quicksand', sans-serif;*/
+  font-family: 'Abel', sans-serif;
+}
 .navbar {
   width: 100%;
   /*background-color: #e3f2fd; */
@@ -254,9 +259,14 @@ form#new-recipe-form input[type=text] {
 }
 
 .greet {
+  background-color: white;
   text-align: center;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
 }
 
 .upload {
-  padding: 60px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
