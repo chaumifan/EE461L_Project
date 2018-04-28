@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
+from werkzeug.http import parse_options_header
 from google.appengine.api import users
 import database as db
-import json
+import json, sys, os
 
 app = Flask(__name__)
 
@@ -16,17 +17,26 @@ def create():
 	if not user:
 		return redirect(users.create_login_url(request.url))
 	if request.method == 'POST':
-		name = request.form['name']
-		description = request.form['description']
-		instructions = request.form['instructions']
-		#image_link = request.form['image_link']
-		ingred_list = request.form.getlist('ingredients[]')
-		if db.create_recipe(name, user, description, instructions, '', ingred_list):
-			return 'OK' #Return value doesn't matter
-		else:
-			return 'Recipe name is not unique! Please change your recipe name.', 400
+		try:
+			name = request.form['name']
+			description = request.form['description']
+			instructions = request.form['instructions']
+			photo = request.files.get('photo')
+			ingred_list = request.form.getlist('ingredients[]')
+
+			if db.create_recipe(name, user, description, instructions, photo, ingred_list):
+				return 'OK' #Return value doesn't matter
+			else:
+				return 'Recipe name is not unique! Please change your recipe name.', 400
+		except Exception as e:
+			return str(e), 400
 	else:
 		return render_template('create.html', user=user)
+
+@app.route("/img/<key>")
+def img(key):
+	image = db.get_image(key)
+	return Response(image.blob, mimetype=image.mimetype)
 
 @app.route('/submit_query', methods=['POST'])
 def submit_query():

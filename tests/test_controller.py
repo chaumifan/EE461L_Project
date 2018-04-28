@@ -5,6 +5,7 @@ from google.appengine.ext import testbed
 from google.appengine.api import memcache
 from google.appengine.ext import ndb
 from main import app
+import database as db
 
 DEFAULT_EMAIL = 'user@example.com'
 
@@ -64,6 +65,7 @@ class ControllerTest(unittest.TestCase):
 				'ingredients[]' : ['burger', 'buns']
 			})
 		self.assertEquals(result.status_code, 200)
+		self.assertEquals(len(db.query_ingredients(['burger', 'buns'], [])), 1)
 
 	def testSaveIngredients(self):
 		self.assertFalse(users.get_current_user())
@@ -80,6 +82,9 @@ class ControllerTest(unittest.TestCase):
 			})
 		self.assertEquals(result.status_code, 200)
 		self.assertEquals(result.get_data(True), 'OK')
+		u = db.load_ingredients_from_user(users.get_current_user())
+		self.assertEquals(len(u.ingred_list), 2)
+		self.assertEquals(len(u.exclude_list), 2)
 
 	def testLoadIngredients(self):
 		self.assertFalse(users.get_current_user())
