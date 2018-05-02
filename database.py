@@ -6,8 +6,9 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		return False
 
 	image_name = name.replace(" ", "_")
-	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
-	image.put()
+	if photo is not None:
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
+		image.put()
 
 	recipe = Recipe(
 		name=name,
