@@ -25,10 +25,8 @@
     // header.css('background', backgrounds[0]);
   });
 </script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='edit.js') }}"></script>
 {% endblock %}
-
-{% block nav_create %}<li class="active"><a>Upload Creation</a></li>{% endblock %}
 
 {% block body %}
 <div id="header-img" class="jumbotron">
@@ -49,28 +47,27 @@
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="upload panel-body">
-          <form id="recipeForm" enctype="multipart/form-data" method="post">
+          <form id="recipeEditForm" enctype="multipart/form-data" method="post">
             <h3>Recipe Name</h3>
-            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" name="name">
+            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" name="name" value="{{ recipe.name }}" readonly>
             <br/>
             <br/>
             <br/>
           
             <h3>Link to Recipe</h3>
-            <input class="input" placeholder="Example: https://www.pad_thai.com/recipe" id="recipe-link" type="text" name="instructions">
+            <input class="input" placeholder="Example: https://www.pad_thai.com/recipe" id="recipe-link" type="text" name="instructions" value="{{ recipe.instructions }}">
             <br/>
             <br/>
             <br/>
           
             <h3>Brief Description</h3>
-            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-description" type="text" name="description">
+            <input class="input" placeholder="Example: A soy-based Chinese-style beef dish. Best served over soft rice noodles or rice" id="recipe-description" type="text" name="description" value="{{ recipe.description }}">
             <br/>
             <br/>
             <br/>
 
             <h3>Upload Photo</h3>
-            <input type='file' id="recipe-photo" >
-            <img id="prev" src="#" alt="your image" >
+            <input class="input" id="recipe-photo" type="file" name="photo">
             <br/>
             <br/>
             <br/>
@@ -78,7 +75,7 @@
 
           <h3>Ingredients</h3>
            <!--  <input class="input_recipe" placeholder="Specify which ingredients are required" type="text" > -->
-          <form id="addIngredientUpload">
+          <form id="addIngredientEdit">
             <span><button class="plus_btn btn-link" input type="submit"></button></span>
             <input class="input_upload" placeholder="Specify which ingredients are required" type="text">
           </form>
@@ -86,8 +83,11 @@
 
           <!-- dummy ingredient list -->
           <div class="container ingred-list include">
-            <ul class="list-group" id="upload_list">
-            <!-- where included ingredients get inserted in -->
+            <ul class="list-group" id="edit_list">
+              <!-- where included ingredients get inserted in -->
+              {% for ingred in recipe.ingred_list %}
+              <li class="list-group-item">{{ ingred }}<span class="remove"><span class="btn btn-sm btn-default" onclick=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -97,16 +97,16 @@
     <div class="col-sm-6">
       <div class="panel panel-default">
         <div class="panel-body panel-header">
-          <h3> Guidelines and Instructions for Submission </h3>
+          <h3> Guidelines and Instructions for Submitting Edits </h3>
         </div>
         <div class="panel-body">
-          <div class="panel-text">You know the rules. If you upload it, we own it.</div>
+          <div class="panel-text">You know the rules. If you upload (or edit) it, we own it.</div>
           <br/>
           <input id="check" type="checkbox" name="accept-terms"/>
           <label for="accept-terms">I accept these onerous terms and conditions</label>
           <br/>
           <br/>
-          <div class="submit btn btn-sm btn-default" id="uploadRecipe">Submit Recipe</div>
+          <div class="submit btn btn-sm btn-default" id="editRecipe">Save Changes</div>
         </div>
       </div>
     
