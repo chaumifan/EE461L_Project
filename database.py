@@ -5,7 +5,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
-	image_name = name.replace(" ", "_")
+	image_name = name # .replace(" ", "_")
 	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
 	image.put()
 
@@ -32,11 +32,53 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		q.put()
 	return True
 
+def edit_recipe(name, user, description, instructions, photo, ingred_list):
+	recipe = ndb.Key(Recipe, name).get()
+	if recipe is None:
+		return False
+
+	recipe.user = user.email()
+	recipe.description = description
+	recipe.instructions = instructions
+
+	# Remove old ingredients
+	for ingred in recipe.ingred_list:
+		q = contains_ingred(ingred)
+		if q:
+			q.recipe_list.remove(name)
+		q.put()
+
+	recipe.ingred_list = ingred_list
+
+	if photo is not None:
+		# Delete old image
+		delete_image(recipe.name)
+
+		# Create new image
+		image_name = name # .replace(" ", "_")
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
+		image.put()
+
+		recipe.image_link ='/img/{}'.format(image_name)
+
+	recipe.put()
+
+	# Add any new ingredients
+	for ingred in ingred_list:
+		q = contains_ingred(ingred)
+		#if ingredient exists, link recipe
+		if q:
+			q.recipe_list.append(name)
+		#if not, create new ingredient with initial recipe
+		else:
+			q = Ingredient(name=ingred, recipe_list=[name], id = ingred)
+		q.put()
+
+	return True
 
 def contains_ingred(ingred):
 	q = Ingredient.query(Ingredient.name == ingred)
 	return q.get()
-
 
 def query_ingredients(ingred_list, exclude_list):
 	if len(ingred_list) == 0 and len(exclude_list) == 0:
@@ -94,6 +136,9 @@ def load_ingredients_from_user(user):
 
 def get_image(recipe_name):
 	return ndb.Key(Image, recipe_name).get()
+
+def delete_image(recipe_name):
+	ndb.Key(Image, recipe_name).delete()
 
 def get_recipe(recipe_name):
 	return ndb.Key(Recipe, recipe_name).get()

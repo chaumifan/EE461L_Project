@@ -33,6 +33,37 @@ def create():
 	else:
 		return render_template('create.html', user=user)
 
+@app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
+def edit(recipe_id):
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+
+	recipe = db.get_recipe(recipe_id)
+	if user.email() != recipe.author:
+		return "You do not own this recipe!", 400
+
+	if request.method == 'POST':
+		name = request.form['name']
+		description = request.form['description']
+		instructions = request.form['instructions']
+		ingred_list = request.form.getlist('ingredients[]')
+
+		if 'photo' in request.files:
+			photo = request.files.get('photo')
+
+			if photo.filename == '':
+				photo = None
+		else:
+			photo = None
+
+		if db.edit_recipe(name, user, description, instructions, photo, ingred_list):
+			return 'OK' #Return value doesn't matter
+		else:
+			return 'Recipe does not exist!', 400
+	else:
+		return render_template('edit.html', user=user, recipe=recipe)
+
 @app.route("/img/<key>")
 def img(key):
 	image = db.get_image(key)
