@@ -6,7 +6,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		return False
 
 	if photo is not None:
-		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
 		image.put()
 
 	recipe = Recipe(
@@ -14,7 +14,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		author=user.email(),
 		description=description,
 		instructions=instructions,
-		image_link='/img/{}'.format(image_name),
+		image_link='/img/{}'.format(name),
 		ingred_list=ingred_list,
 		rating=0,
 		raters=[],

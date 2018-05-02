@@ -71,11 +71,13 @@ def img(key):
 
 @app.route('/submit_query', methods=['POST'])
 def submit_query():
+	user = users.get_current_user()
+
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
 
-	return render_template('recipes.html', res=recipes)
+	return render_template('recipes.html', res=recipes, user=user)
 
 @app.route('/save_ingredients', methods=['POST'])
 def save_ingredients():
