@@ -1,12 +1,12 @@
 from google.appengine.ext import ndb
-
 import sys
 
 def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
-	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
+	image_name = name.replace(" ", "_")
+	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
 	image.put()
 
 	recipe = Recipe(
@@ -14,8 +14,10 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		author=user.email(),
 		description=description,
 		instructions=instructions,
-		image_link='/img/{}'.format(name),
+		image_link='/img/{}'.format(image_name),
 		ingred_list=ingred_list,
+		rating=0,
+		raters=[],
 		id=name
 		)
 	recipe.put()
@@ -93,6 +95,12 @@ def load_ingredients_from_user(user):
 def get_image(recipe_name):
 	return ndb.Key(Image, recipe_name).get()
 
+def get_recipe(recipe_name):
+	return ndb.Key(Recipe, recipe_name).get()
+
+def save_recipe(recipe):
+	recipe.put()
+
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
 	author = ndb.StringProperty()
@@ -100,6 +108,9 @@ class Recipe(ndb.Model):
 	instructions = ndb.StringProperty()
 	image_link = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)
+	
+	rating = ndb.FloatProperty()
+	raters = ndb.StringProperty(repeated=True)
 
 class Ingredient(ndb.Model):
 	name = ndb.StringProperty()

@@ -43,6 +43,7 @@ def submit_query():
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
+
 	return render_template('recipes.html', res=recipes)
 
 @app.route('/save_ingredients', methods=['POST'])
@@ -67,6 +68,25 @@ def load_ingredients():
 def about():
   	user = users.get_current_user()
   	return render_template('about.html', user=user)
+
+@app.route('/rate', methods=['POST'])
+def rate():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+
+	recipe = db.get_recipe(request.form['recipe'])
+	rating = float(request.form['rating'])
+	
+	if user.email() in recipe.raters:
+		return 'You have already rated this item!', 400
+
+	number_of_raters = len(recipe.raters)
+	recipe.rating = (recipe.rating*number_of_raters + rating) / (number_of_raters+1)
+	recipe.raters.append(user.email())
+	db.save_recipe(recipe)
+
+	return str(recipe.rating)
 
 @app.context_processor
 def utility_processor():
