@@ -158,6 +158,15 @@ function rate(recipe, rating) {
     });
 }
 
+function submit_query() {
+  var ingred_list = Array.from(local_ingred_set);
+  var exclude_list = Array.from(local_exclude_set);
+  $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
+    var results = document.getElementById('results');
+    results.innerHTML = data;
+  });
+}
+
 $(function(){
     // Load ingredients and excludes from query string
     loadIngredients();
@@ -170,6 +179,7 @@ $(function(){
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
         addIngredientOnLandingPage(ingred);
+        submit_query();
     });
 
     $('#addExclude').submit(function(e) {
@@ -178,6 +188,7 @@ $(function(){
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
         addExcludeOnLandingPage(exclude);
+        submit_query();
     });
 
     $('#ingred_list').on('click', 'span.remove', function (e) {
@@ -186,6 +197,7 @@ $(function(){
         local_ingred_set.delete(ingred);
         include_list.removeChild(this.parentNode);
         updateURL(removeIngred(ingred));
+        submit_query();
     });
 
     $('#exclude_list').on('click', 'span.remove', function (e) {
@@ -194,15 +206,7 @@ $(function(){
         local_exclude_set.delete(ingred);
         exclude_list.removeChild(this.parentNode);
         updateURL(removeIngred(ingred));
-    });
-
-    $('#submitQuery').on('click', function (e) {
-        var ingred_list = Array.from(local_ingred_set);
-        var exclude_list = Array.from(local_exclude_set);
-        $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
-            var results = document.getElementById('results');
-            results.innerHTML = data;
-        });
+        submit_query();
     });
 
     $('#saveQuery').on('click', function (e) {
@@ -216,8 +220,11 @@ $(function(){
     $('#loadQuery').on('click', function (e) {
         $.post("/load_ingredients", function(data) {
             data = $.parseJSON(data);
+            local_ingred_set.clear();
+            local_exclude_set.clear();
             data.ingred_list.forEach(addIngredientOnLandingPage);
             data.exclude_list.forEach(addExcludeOnLandingPage);
+            submit_query();
         });
     });
 

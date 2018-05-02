@@ -31,10 +31,10 @@ class DatastoreTestCase(unittest.TestCase):
 	def populate(self):
 		self.loginUser()
 		user = users.get_current_user()
-		db.create_recipe('rice', user, 'steamed rice', 'https://howtosteamrice.com', 'https://pic-of-rice.com', ['rice', 'water', 'salt'])
-		db.create_recipe('veggies', user, 'cooked veggies', 'https://howtocookveggies.com', 'https://pic-of-veggies.com', ['veggies', 'oil'])
-		db.create_recipe('potatoes', user, 'fried potatoes', 'https://fries.com', 'https://pic-of-fries.com', ['potato', 'salt', 'pepper', 'oil'])
-		db.create_recipe('eggs', user, 'scrambled eggs', 'https://eggs.com', 'https://pic-of-eggs.com', ['eggs', 'milk'])
+		db.create_recipe('rice', user, 'steamed rice', 'https://howtosteamrice.com', None, ['rice', 'water', 'salt'])
+		db.create_recipe('veggies', user, 'cooked veggies', 'https://howtocookveggies.com', None, ['veggies', 'oil'])
+		db.create_recipe('potatoes', user, 'fried potatoes', 'https://fries.com', None, ['potato', 'salt', 'pepper', 'oil'])
+		db.create_recipe('eggs', user, 'scrambled eggs', 'https://eggs.com', None, ['eggs', 'milk'])
 
 	#################
 	# TEST CONTAINS #
@@ -55,7 +55,7 @@ class DatastoreTestCase(unittest.TestCase):
 	##############
 	def test_query_empty(self):
 		res = db.query_ingredients(list(), list())
-		self.assertEquals(res, [])
+		self.assertEquals(len(res), 4)
 
 	def test_query_simple(self):
 		include = ['rice', 'water']

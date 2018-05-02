@@ -43,7 +43,7 @@ def submit_query():
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
-
+	recipes = sorted(recipes, key=lambda r: r.rating, reverse=True)
 	return render_template('recipes.html', res=recipes)
 
 @app.route('/save_ingredients', methods=['POST'])
