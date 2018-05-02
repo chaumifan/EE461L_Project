@@ -138,6 +138,26 @@ function addExcludeOnLandingPage(exclude) {
     }
 }
 
+function rate(recipe, rating) {
+    $.post('/rate', {'recipe': recipe, 'rating': rating}, function(data) {
+        alert("Recorded! New rating: " + data);
+
+        // Update stars
+        var new_rating = parseFloat(data)
+        for (var i = 1; i <= 5; i++) {
+            var star_id = recipe + '-star-' + i.toString();
+            var star = $(document.getElementById(star_id));
+            if (i <= new_rating) {
+                star.addClass('checked');
+            } else {
+                star.removeClass('checked');
+            }
+        }
+    }).error(function(data) {
+        alert(data.responseText);
+    });
+}
+
 $(function(){
     // Load ingredients and excludes from query string
     loadIngredients();
@@ -255,13 +275,20 @@ $(function(){
             }
             alert(msg);
         } else {
-            var ingred_list = Array.from(local_ingred_upload_set);
-            $('#recipe-ingredients').val(ingred_list);
-
             // Submit form (with picture attached)
             // $('#recipeForm')[0].submit();
-            var f =  document.getElementById("recipeForm");
-            var formData = new FormData(f);
+            var form =  document.getElementById("recipeForm");
+
+            var ingred_list = Array.from(local_ingred_upload_set);
+            for (var i = 0; i < ingred_list.length; i++) {
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "ingredients[]"
+                input.value = ingred_list[i];
+                form.appendChild(input); // put it into the DOM
+            }
+
+            var formData = new FormData(form);
 
             $.ajax({
                 type: 'POST',
