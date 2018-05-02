@@ -33,6 +33,13 @@ def create():
 	else:
 		return render_template('create.html', user=user)
 
+@app.route('/uploads', methods=['GET', 'POST'])
+def uploads():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	return render_template('uploads.html', user=user)
+
 @app.route("/img/<key>")
 def img(key):
 	image = db.get_image(key)
