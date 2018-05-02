@@ -38,7 +38,9 @@ def uploads():
 	user = users.get_current_user()
 	if not user:
 		return redirect(users.create_login_url(request.url))
-	return render_template('uploads.html', user=user)
+	uploads = db.get_user_uploads(user)
+	uploads_string = render_template('recipes.html', res=uploads)
+	return render_template('uploads.html', user=user, uploads=uploads_string)
 
 @app.route("/img/<key>")
 def img(key):
