@@ -291,3 +291,23 @@ form#new-recipe-form input[type=text] {
 #deleteRecipe  {
   color: red;
 }
+
+.instructions h4{
+  font-size: 20px;
+}
+
+.teamfeed {
+  padding-top: 30px;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.teamfeed h3, h1 {
+  text-align: center;
+}
+
+.teamimg{
+  width: 100%;
+  max-height: 130px;
+  object-fit: contain;
+}
