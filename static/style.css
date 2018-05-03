@@ -57,8 +57,17 @@ body {
 }
 
 #prev{
-    width: 100%;
+    max-width: 50%;
+    height: 200px;
     margin-top: 12px;
+}
+
+.pull-left {
+  margin-left: 25px !important;
+}
+
+.goto {
+  margin-right: 25px !important;
 }
 
 .ingred-list {
