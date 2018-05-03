@@ -276,3 +276,7 @@ form#new-recipe-form input[type=text] {
   padding-left: 40px;
   padding-right: 40px;
 }
+
+#deleteRecipe  {
+  color: red;
+}

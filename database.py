@@ -146,6 +146,26 @@ def get_recipe(recipe_name):
 def save_recipe(recipe):
 	recipe.put()
 
+def delete_recipe(recipe_id):
+	recipe = ndb.Key(Recipe, recipe_id).get()
+	if recipe is None:
+		return False
+
+	# Delete photo
+	delete_image(recipe_id)
+
+	# Remove ingredients
+	for ingred in recipe.ingred_list:
+		q = contains_ingred(ingred)
+		if q:
+			q.recipe_list.remove(recipe_id)
+		q.put()
+
+	# Finally, delete the recipe
+	ndb.Key(Image, recipe_id).delete()
+
+	return True
+
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
 	author = ndb.StringProperty()

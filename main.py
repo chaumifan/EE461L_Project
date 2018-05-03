@@ -64,6 +64,25 @@ def edit(recipe_id):
 	else:
 		return render_template('edit.html', user=user, recipe=recipe)
 
+@app.route('/delete/<recipe_id>', methods=['POST'])
+def delete(recipe_id):
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+
+	recipe = db.get_recipe(recipe_id)
+	if user.email() != recipe.author:
+		return "You do not own this recipe!", 400
+
+	print("\n\nhere\n\n")
+
+	if db.delete_recipe(recipe_id):
+		print("\n\nyes\n\n")
+		return "OK"
+	else:
+		print("\n\nelse\n\n")
+		return "Error when deleting!"
+
 @app.route("/img/<key>")
 def img(key):
 	image = db.get_image(key)
