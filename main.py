@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def landing():
-  	user = users.get_current_user()
-  	return render_template('landing.html', user=user)
+	user = users.get_current_user()
+	return render_template('landing.html', user=user)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -32,16 +32,6 @@ def create():
 			return str(e), 400
 	else:
 		return render_template('create.html', user=user)
-
-
-@app.route('/uploads', methods=['GET', 'POST'])
-def uploads():
-	user = users.get_current_user()
-	if not user:
-		return redirect(users.create_login_url(request.url))
-	uploads = db.get_user_uploads(user)
-	uploads_string = render_template('recipes.html', res=uploads)
-	return render_template('uploads.html', user=user, uploads=uploads_string)
 
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
@@ -84,13 +74,9 @@ def delete(recipe_id):
 	if user.email() != recipe.author:
 		return "You do not own this recipe!", 400
 
-	print("\n\nhere\n\n")
-
 	if db.delete_recipe(recipe_id):
-		print("\n\nyes\n\n")
 		return "OK"
 	else:
-		print("\n\nelse\n\n")
 		return "Error when deleting!"
 
 @app.route("/img/<key>")
@@ -105,7 +91,7 @@ def submit_query():
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
-	recipes = sorted(recipes, key=lambda r: r.rating, reverse=True)
+
 	return render_template('recipes.html', res=recipes, user=user)
 
 @app.route('/save_ingredients', methods=['POST'])
