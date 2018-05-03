@@ -184,6 +184,12 @@ def delete_recipe(recipe_id):
 			q.recipe_list.remove(recipe_id)
 		q.put()
 
+	# Remove recipe from author's list of uploads
+	user = ndb.Key(UserIngredients, recipe.author).get()
+	if user and (recipe_id in user.uploads_list):
+		user.uploads_list.remove(recipe_id)
+		user.put()
+
 	# Finally, delete the recipe
 	ndb.Key(Recipe, recipe_id).delete()
 
