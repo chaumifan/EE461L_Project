@@ -5,16 +5,14 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
-	image_name = name.replace(" ", "_")
-	if photo is not None:
-		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
-		image.put()
+	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
+	image.put()
 
 	recipe = Recipe(
 		name=name,
 		author=user.email(),
 		description=description,
-		instructions=instructions,
+		instructions=make_absolute(instructions),
 		image_link='/img/{}'.format(name),
 		ingred_list=ingred_list,
 		rating=0,
@@ -31,29 +29,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		else:
 			q = Ingredient(name=ingred, recipe_list=[name], id = ingred)
 		q.put()
-	u = ndb.Key(UserIngredients, user.email()).get()
-	if u:
-		if u.uploads_list:
-			u.uploads_list.append(name) #TODO change to key
-		else:
-			u.uploads_list = [name]
-	else:
-		u = UserIngredients(user_email=user.email(), 
-							ingred_list=[], 
-							exclude_list=[], 
-							uploads_list=[name],
-							id=user.email())
-	u.put()
 	return True
-
-def get_user_uploads(user):
-	u = ndb.Key(UserIngredients, user.email()).get()
-	ret = list()
-	if u:
-		for r in u.uploads_list:
-			key = ndb.Key(Recipe, r)
-			ret.append(key.get())
-	return ret
 
 def edit_recipe(name, user, description, instructions, photo, ingred_list):
 	recipe = ndb.Key(Recipe, name).get()
@@ -62,7 +38,7 @@ def edit_recipe(name, user, description, instructions, photo, ingred_list):
 
 	recipe.user = user.email()
 	recipe.description = description
-	recipe.instructions = instructions
+	recipe.instructions = make_absolute(instructions)
 
 	# Remove old ingredients
 	for ingred in recipe.ingred_list:
@@ -105,14 +81,14 @@ def contains_ingred(ingred):
 
 def query_ingredients(ingred_list, exclude_list):
 	if len(ingred_list) == 0 and len(exclude_list) == 0:
-		return Recipe.query().fetch()
+		return []
 
 	recipes = set()
 	if ingred_list is not None and len(ingred_list) > 0:
 		q = Ingredient.query(Ingredient.name.IN(ingred_list))
 		include_results = q.fetch()
 	else:
-		include_results = Ingredient.query().fetch()
+		include_results = list()
 	if exclude_list is not None and len(exclude_list) > 0:
 		p = Ingredient.query(Ingredient.name.IN(exclude_list))
 		exclude_results = p.fetch()
@@ -180,14 +156,28 @@ def delete_recipe(recipe_id):
 	# Remove ingredients
 	for ingred in recipe.ingred_list:
 		q = contains_ingred(ingred)
-		if q:
+		if q and (recipe_id in q.recipe_list):
 			q.recipe_list.remove(recipe_id)
 		q.put()
 
 	# Finally, delete the recipe
-	ndb.Key(Image, recipe_id).delete()
+	ndb.Key(Recipe, recipe_id).delete()
 
 	return True
+
+def make_absolute(url):
+	protocols = ("http://", "https://")
+
+	is_absolute = False
+	for prot in protocols:
+		if prot == url[:len(prot)]:
+			is_absolute = True
+			break
+
+	if not is_absolute:
+		url = protocols[0] + url
+
+	return url
 
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
@@ -208,7 +198,6 @@ class UserIngredients(ndb.Model):
 	user_email = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)
 	exclude_list = ndb.StringProperty(repeated=True)
-	uploads_list = ndb.StringProperty(repeated=True)
 
 class Image(ndb.Model):
 	blob = ndb.BlobProperty()
