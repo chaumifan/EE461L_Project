@@ -26,6 +26,11 @@
   });
 </script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+$(function() {
+  submit_query();
+});
+</script>
 {% endblock %}
 
 {% block nav_browse %}<li class="active"><a>Browse Recipes</a></li>{% endblock %}
@@ -52,18 +57,13 @@
       <h3 class="greet">Welcome back, {{ user.nickname() }}! </h3>
       </br>
       <div class="row">
-        <div class="col-sm-4">
-          <div class="submit btn btn-sm btn-default trio" id="submitQuery">Submit</div>
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="submit btn btn-sm btn-default trio" id="loadQuery">Load</div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="submit btn btn-sm btn-default trio" id="saveQuery">Save</div>
         </div>
       </div>
-      {% else %}
-      <div class="submit single btn btn-sm btn-default" id="submitQuery">Submit Query</div>
       {% endif %}
       <!-- search row -->
       <div class="panel panel-default">

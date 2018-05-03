@@ -143,4 +143,11 @@ $(function(){
             });
         }
     });
+
+    $('#deleteRecipe').on('click', function(e) {
+        if (confirm("Deleting objects is irreversible. Do you want to continue?")) {
+            $.post("/delete/" + $("#recipe-name").val());
+            window.location.replace('/');
+        }
+    });
 });
