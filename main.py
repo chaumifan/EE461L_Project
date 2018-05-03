@@ -33,6 +33,15 @@ def create():
 	else:
 		return render_template('create.html', user=user)
 
+@app.route('/uploads', methods=['GET', 'POST'])
+def uploads():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	uploads = db.get_user_uploads(user)
+	uploads_string = render_template('recipes.html', res=uploads, user=user)
+	return render_template('uploads.html', user=user, uploads=uploads_string)
+
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
 	user = users.get_current_user()
@@ -70,13 +79,19 @@ def delete(recipe_id):
 	if not user:
 		return redirect(users.create_login_url(request.url))
 
+	print("\n\nHere!\n\n")
+
 	recipe = db.get_recipe(recipe_id)
 	if user.email() != recipe.author:
 		return "You do not own this recipe!", 400
 
+	print("\n\nhey!\n\n")
+
 	if db.delete_recipe(recipe_id):
+		print("\n\ngood!\n\n")
 		return "OK"
 	else:
+		print("\n\nerror!\n\n")
 		return "Error when deleting!"
 
 @app.route("/img/<key>")

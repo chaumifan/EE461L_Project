@@ -156,12 +156,12 @@ def delete_recipe(recipe_id):
 	# Remove ingredients
 	for ingred in recipe.ingred_list:
 		q = contains_ingred(ingred)
-		if q:
+		if q and (recipe_id in q.recipe_list):
 			q.recipe_list.remove(recipe_id)
 		q.put()
 
 	# Finally, delete the recipe
-	ndb.Key(Image, recipe_id).delete()
+	ndb.Key(Recipe, recipe_id).delete()
 
 	return True
 

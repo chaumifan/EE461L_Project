@@ -110,7 +110,8 @@ body {
 }
 
 .panel-text {
-  font-size: 15px;
+  text-align: center;
+  font-size: 16px;
   margin-top: 10px;
 }
 
@@ -194,7 +195,8 @@ form#new-recipe-form input[type=text] {
   margin: 0 auto;
   box-shadow: 3px 3px 8px darkgrey; /*default grey*/
   font-size: 17px;
-  margin-bottom: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: none;
 }
 
