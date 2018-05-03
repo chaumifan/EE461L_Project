@@ -12,7 +12,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		name=name,
 		author=user.email(),
 		description=description,
-		instructions=instructions,
+		instructions=make_absolute(instructions),
 		image_link='/img/{}'.format(name),
 		ingred_list=ingred_list,
 		rating=0,
@@ -38,7 +38,7 @@ def edit_recipe(name, user, description, instructions, photo, ingred_list):
 
 	recipe.user = user.email()
 	recipe.description = description
-	recipe.instructions = instructions
+	recipe.instructions = make_absolute(instructions)
 
 	# Remove old ingredients
 	for ingred in recipe.ingred_list:
@@ -164,6 +164,20 @@ def delete_recipe(recipe_id):
 	ndb.Key(Recipe, recipe_id).delete()
 
 	return True
+
+def make_absolute(url):
+	protocols = ("http://", "https://")
+
+	is_absolute = False
+	for prot in protocols:
+		if prot == url[:len(prot)]:
+			is_absolute = True
+			break
+
+	if not is_absolute:
+		url = protocols[0] + url
+
+	return url
 
 class Recipe(ndb.Model):
 	name = ndb.StringProperty()
