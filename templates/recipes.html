@@ -14,10 +14,10 @@
             <p class="panel-text">{{r.description}}</p>
 
             {% if user and user.email() == r.author %}
-            <a href="/edit/{{ r.name }}" class="link btn btn-default pull-left">Edit</a>
+            <a href="/edit/{{ r.name }}" class="link btn btn-default pull-left">Edit Recipe</a>
             {% endif %}
             
-            <a href="{{r.instructions}}" target="_blank" class="link btn btn-default">Go to recipe</a>
+            <a href="{{r.instructions}}" target="_blank" class="link btn btn-default goto">Go to Recipe</a>
           </div>
         </div>
       </div>
