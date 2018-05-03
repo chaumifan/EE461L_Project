@@ -5,8 +5,9 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
+	image_name = name.replace(" ", "_")
 	if photo is not None:
-		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
 		image.put()
 
 	recipe = Recipe(
@@ -104,14 +105,14 @@ def contains_ingred(ingred):
 
 def query_ingredients(ingred_list, exclude_list):
 	if len(ingred_list) == 0 and len(exclude_list) == 0:
-		return []
+		return Recipe.query().fetch()
 
 	recipes = set()
 	if ingred_list is not None and len(ingred_list) > 0:
 		q = Ingredient.query(Ingredient.name.IN(ingred_list))
 		include_results = q.fetch()
 	else:
-		include_results = list()
+		include_results = Ingredient.query().fetch()
 	if exclude_list is not None and len(exclude_list) > 0:
 		p = Ingredient.query(Ingredient.name.IN(exclude_list))
 		exclude_results = p.fetch()

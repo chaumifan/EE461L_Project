@@ -55,7 +55,7 @@ class DatastoreTestCase(unittest.TestCase):
 	##############
 	def test_query_empty(self):
 		res = db.query_ingredients(list(), list())
-		self.assertEquals(res, [])
+		self.assertEquals(len(res), 4)
 
 	def test_query_simple(self):
 		include = ['rice', 'water']
