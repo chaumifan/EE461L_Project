@@ -74,6 +74,18 @@ function removeIngred(ingred) {
     }
 }
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#prev').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 function updateURL(url) {
     if (history.pushState) {
         window.history.pushState({path:url}, '', url);
@@ -240,7 +252,12 @@ $(function(){
         local_ingred_set.delete(ingred);
         upload_ingred_list.removeChild(this.parentNode);
     });
+  
 
+    $('#recipe-photo').change(function(){
+                            readURL(this);
+    });
+  
     $('#uploadRecipe').on('click', function(e) {
         var name = $('#recipe-name').val()
         var link = $('#recipe-link').val().toLowerCase();

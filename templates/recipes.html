@@ -12,6 +12,11 @@
               {% endfor %}
             </h2>
             <p class="panel-text">{{r.description}}</p>
+
+            {% if user and user.email() == r.author %}
+            <a href="/edit/{{ r.name }}" class="link btn btn-default pull-left">Edit</a>
+            {% endif %}
+            
             <a href="{{r.instructions}}" target="_blank" class="link btn btn-default">Go to recipe</a>
           </div>
         </div>
