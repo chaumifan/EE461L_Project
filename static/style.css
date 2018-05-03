@@ -87,6 +87,10 @@ body {
   border: 0px solid transparent;
 }
 
+.include, .exclude {
+  margin-bottom: 15px;
+}
+
 .include .list-group-item {
   height: 35px;
   font-size: 17px;
