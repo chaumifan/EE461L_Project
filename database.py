@@ -5,6 +5,7 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
+	image_name = name.replace(" ", "_")
 	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
 	image.put()
 
@@ -29,7 +30,30 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 		else:
 			q = Ingredient(name=ingred, recipe_list=[name], id = ingred)
 		q.put()
+
+	u = ndb.Key(UserIngredients, user.email()).get()
+	if u:
+		if u.uploads_list:
+			u.uploads_list.append(name) #TODO change to key
+		else:
+			u.uploads_list = [name]
+	else:
+		u = UserIngredients(user_email=user.email(),
+							ingred_list=[],
+							exclude_list=[], 
+							uploads_list=[name],
+							id=user.email())
+	u.put()
 	return True
+
+def get_user_uploads(user):
+	u = ndb.Key(UserIngredients, user.email()).get()
+	ret = list()
+	if u:
+		for r in u.uploads_list:
+			key = ndb.Key(Recipe, r)
+			ret.append(key.get())
+	return ret
 
 def edit_recipe(name, user, description, instructions, photo, ingred_list):
 	recipe = ndb.Key(Recipe, name).get()
@@ -198,6 +222,7 @@ class UserIngredients(ndb.Model):
 	user_email = ndb.StringProperty()
 	ingred_list = ndb.StringProperty(repeated=True)
 	exclude_list = ndb.StringProperty(repeated=True)
+	uploads_list = ndb.StringProperty(repeated=True)
 
 class Image(ndb.Model):
 	blob = ndb.BlobProperty()
