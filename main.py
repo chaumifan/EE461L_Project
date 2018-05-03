@@ -33,6 +33,16 @@ def create():
 	else:
 		return render_template('create.html', user=user)
 
+
+@app.route('/uploads', methods=['GET', 'POST'])
+def uploads():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	uploads = db.get_user_uploads(user)
+	uploads_string = render_template('recipes.html', res=uploads)
+	return render_template('uploads.html', user=user, uploads=uploads_string)
+
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
 def edit(recipe_id):
 	user = users.get_current_user()
@@ -95,7 +105,7 @@ def submit_query():
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
-
+	recipes = sorted(recipes, key=lambda r: r.rating, reverse=True)
 	return render_template('recipes.html', res=recipes, user=user)
 
 @app.route('/save_ingredients', methods=['POST'])
