@@ -40,7 +40,7 @@ def uploads():
 	if not user:
 		return redirect(users.create_login_url(request.url))
 	uploads = db.get_user_uploads(user)
-	uploads_string = render_template('recipes.html', res=uploads)
+	uploads_string = render_template('recipes.html', res=uploads, user=user)
 	return render_template('uploads.html', user=user, uploads=uploads_string)
 
 @app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
