@@ -138,6 +138,19 @@ function addExcludeOnLandingPage(exclude) {
     }
 }
 
+function clearIngredientAndExclude() {
+    local_ingred_set.clear();
+    local_exclude_set.clear();
+    var ingred_list = document.getElementById('ingred_list');
+    ingred_list.innerHTML = '';
+    var exclude_list = document.getElementById('exclude_list');
+    exclude_list.innerHTML = '';
+    var current_url = window.location.href;
+    if (current_url.indexOf('?') !== -1) {
+        updateURL(current_url.substring(0, current_url.indexOf('?')));
+    }
+}
+
 function rate(recipe, rating) {
     $.post('/rate', {'recipe': recipe, 'rating': rating}, function(data) {
         alert("Recorded! New rating: " + data);
@@ -220,8 +233,7 @@ $(function(){
     $('#loadQuery').on('click', function (e) {
         $.post("/load_ingredients", function(data) {
             data = $.parseJSON(data);
-            local_ingred_set.clear();
-            local_exclude_set.clear();
+            clearIngredientAndExclude();
             data.ingred_list.forEach(addIngredientOnLandingPage);
             data.exclude_list.forEach(addExcludeOnLandingPage);
             submit_query();
