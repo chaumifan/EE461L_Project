@@ -5,9 +5,9 @@ def create_recipe(name, user, description, instructions, photo, ingred_list):
 	if ndb.Key(Recipe, name).get():
 		return False
 
-	image_name = name.replace(" ", "_")
-	image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
-	image.put()
+	if photo is not None:
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
+		image.put()
 
 	recipe = Recipe(
 		name=name,
@@ -78,8 +78,7 @@ def edit_recipe(name, user, description, instructions, photo, ingred_list):
 		delete_image(recipe.name)
 
 		# Create new image
-		image_name = name # .replace(" ", "_")
-		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=image_name)
+		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
 		image.put()
 
 		recipe.image_link ='/img/{}'.format(image_name)

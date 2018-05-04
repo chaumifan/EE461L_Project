@@ -129,5 +129,5 @@ class ControllerTest(unittest.TestCase):
 				'image_link' : 'www.google.com',
 				'ingredients[]' : ['burger', 'buns']
 			})
-		self.assertEquals(result.status_code, 302)
+		self.assertEquals(result.status_code, 400)
 		self.assertEquals(len(db.query_ingredients(['burger', 'buns'], [])), 1)
