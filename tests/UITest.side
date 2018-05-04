@@ -154,13 +154,6 @@
                "value":"milk"
             },
             {
-               "id":"4679e480-d834-4b6b-8a0a-e04877baf566",
-               "comment":"",
-               "command":"clickAt",
-               "target":"//div[@id='grid']/div/div/div[3]/div",
-               "value":"11,69"
-            },
-            {
                "id":"e1da7981-f699-4f1c-92be-3bb505f2de95",
                "comment":"",
                "command":"clickAt",
@@ -465,13 +458,6 @@
                "command":"clickAt",
                "target":"css=#addExclude > span > button.plus_btn.btn-link",
                "value":"17,11"
-            },
-            {
-               "id":"8681ac50-ad8e-4b73-ac29-419435f670fc",
-               "comment":"",
-               "command":"clickAt",
-               "target":"//div[@id='grid']/div/div/div[3]/div",
-               "value":"81,12"
             },
             {
                "id":"f27434f9-2872-426d-a58e-459ef083b186",
@@ -1034,7 +1020,7 @@
                "id":"54764bb2-6071-41d6-9cb2-e9feee87a6c3",
                "comment":"",
                "command":"assertText",
-               "target":"css=h3",
+               "target":"css=div.panel-body.panel-header > h3",
                "value":"Guidelines and Instructions for Submission"
             },
             {
@@ -1048,8 +1034,15 @@
                "id":"c8836df0-a832-4300-a0bb-5d46240802b9",
                "comment":"",
                "command":"assertText",
-               "target":"//div[@onclick='']",
+               "target":"id=uploadRecipe",
                "value":"Submit Recipe"
+            },
+            {
+               "id":"43450943-6e4b-4fdf-bb8d-209d3e6824da",
+               "comment":"",
+               "command":"clickAt",
+               "target":"//a[contains(text(),'Logout')]",
+               "value":"46,26"
             }
          ]
       },
@@ -1137,8 +1130,8 @@
                "id":"1d69cf70-2897-4e49-a5a6-fddab3d84118",
                "comment":"",
                "command":"assertElementPresent",
-               "target":"css=div.instr",
-               "value":""
+               "target":"css=div.panel-heading",
+               "value":"About Pocket Recipes"
             },
             {
                "id":"255a5a02-65dd-47c4-a66e-2a8ec6bef8ca",
@@ -1158,8 +1151,8 @@
                "id":"2f7fcb26-13aa-47c2-92f2-9cf9a1b1ee71",
                "comment":"",
                "command":"assertElementPresent",
-               "target":"//div[@id='grid']/div[2]/h3",
-               "value":"Tools used to create this project"
+               "target":"//div[@id='grid']/div[3]/div/div",
+               "value":"Developer Tools"
             }
          ]
       },
@@ -1245,6 +1238,159 @@
                "value":"Logout"
             }
          ]
+      },
+      {
+         "id":"ea922e55-2f41-460f-8b48-5c8c9d34eb2d",
+         "name":"ComponentTest2",
+         "commands":[
+            {
+               "id":"5579f682-bf90-436e-bcb9-1d746231151a",
+               "comment":"",
+               "command":"open",
+               "target":"/",
+               "value":""
+            },
+            {
+               "id":"7245154c-d0ca-42f6-b89f-da240d4b8a84",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=input.input",
+               "value":"39,2"
+            },
+            {
+               "id":"f3484b1a-a046-4e7b-9fa8-34903812fd04",
+               "comment":"",
+               "command":"type",
+               "target":"css=input.input",
+               "value":"rice"
+            },
+            {
+               "id":"0f24f9cb-a8a4-4c64-a643-dd470c33bdc7",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=span > button.plus_btn.btn-link",
+               "value":""
+            },
+            {
+               "id":"37f28121-921f-415b-b6db-9891db5bda62",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=li.list-group-item",
+               "value":"rice"
+            },
+            {
+               "id":"5e214db1-a977-44d6-ab03-c6b631024bb7",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=#addExclude > input.input",
+               "value":"74,17"
+            },
+            {
+               "id":"fb4cc856-97aa-4de8-8465-17a9ca5a6ab6",
+               "comment":"",
+               "command":"type",
+               "target":"css=#addExclude > input.input",
+               "value":"tomato"
+            },
+            {
+               "id":"1edacbd3-903b-44e6-a4f8-fab790b34046",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
+               "value":""
+            },
+            {
+               "id":"128617bb-f40f-4d17-8075-8a224c603c86",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"css=#exclude_list > li.list-group-item",
+               "value":"tomato"
+            },
+            {
+               "id":"5eaeaab7-4150-4a71-822a-9f90e34c457f",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=input.input",
+               "value":"32,14"
+            },
+            {
+               "id":"2e06cebf-31cf-4588-ad48-5de89a09316c",
+               "comment":"",
+               "command":"type",
+               "target":"css=input.input",
+               "value":"beef"
+            },
+            {
+               "id":"2ec077a5-0bde-4e20-8812-81d175a7822f",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=span > button.plus_btn.btn-link",
+               "value":""
+            },
+            {
+               "id":"363da34c-018d-4203-a3e4-d706acbed0c2",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"//ul[@id='ingred_list']/li[2]",
+               "value":""
+            },
+            {
+               "id":"0d7e37d5-d50b-454b-9988-f6a821a69bbc",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=#addExclude > input.input",
+               "value":"57,11"
+            },
+            {
+               "id":"6559abd8-4b91-42d5-a651-bf66987fe341",
+               "comment":"",
+               "command":"type",
+               "target":"css=#addExclude > input.input",
+               "value":"broccoli"
+            },
+            {
+               "id":"188a82f8-6057-42a6-b4d5-a326eef499ee",
+               "comment":"",
+               "command":"clickAt",
+               "target":"css=#addExclude > span > button.plus_btn.btn-link",
+               "value":""
+            },
+            {
+               "id":"9c4893ec-ab97-4e76-8084-358d3e62ecab",
+               "comment":"",
+               "command":"assertElementPresent",
+               "target":"//ul[@id='exclude_list']/li[2]",
+               "value":""
+            },
+            {
+               "id":"3f36a495-172d-4e1a-a600-c7ec74784934",
+               "comment":"",
+               "command":"clickAt",
+               "target":"//ul[@id='ingred_list']/li[2]/span/span/span",
+               "value":"5,11"
+            },
+            {
+               "id":"9b38609b-41ac-4dea-89ca-25500ff1d714",
+               "comment":"",
+               "command":"clickAt",
+               "target":"//ul[@id='exclude_list']/li[2]/span/span/span",
+               "value":"7,6"
+            },
+            {
+               "id":"3c72031c-1795-4f49-a8be-955fc83c1f50",
+               "comment":"",
+               "command":"assertElementNotPresent",
+               "target":"//ul[@id='ingred_list']/li[2]",
+               "value":""
+            },
+            {
+               "id":"aed68489-6c6a-455d-a229-ad19e198893d",
+               "comment":"",
+               "command":"assertElementNotPresent",
+               "target":"//ul[@id='exclude_list']/li[2]",
+               "value":""
+            }
+         ]
       }
    ],
    "suites":[
@@ -1258,12 +1404,17 @@
             "0b119800-63c9-461f-b3ca-c91f433fdf87",
             "911f9b7c-4ccb-4781-b2ac-b8711efbd34f",
             "c232208f-41cc-41df-87cd-ac4a79fb2040",
+            "9605e582-9a38-4718-8dcd-717448980d6f",
             "f259078a-f40a-45d6-9d83-e8d1875336e5",
-            "9605e582-9a38-4718-8dcd-717448980d6f"
+            "ea922e55-2f41-460f-8b48-5c8c9d34eb2d",
+            "0de2b521-a80e-43d8-bd2b-5fca499a8f42",
+            "4732c813-2e44-442f-9ae2-835e24eea123"
          ]
       }
    ],
    "urls":[
+      "http://localhost:8080",
+      "http://localhost:8080",
       "http://localhost:8080",
       "http://localhost:8080",
       "http://localhost:8080",
