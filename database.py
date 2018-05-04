@@ -67,7 +67,7 @@ def edit_recipe(name, user, description, instructions, photo, ingred_list):
 	# Remove old ingredients
 	for ingred in recipe.ingred_list:
 		q = contains_ingred(ingred)
-		if q:
+		if q and (name in q.recipe_list):
 			q.recipe_list.remove(name)
 		q.put()
 
@@ -81,7 +81,7 @@ def edit_recipe(name, user, description, instructions, photo, ingred_list):
 		image = Image(mimetype=photo.mimetype, blob=photo.stream.read(), id=name)
 		image.put()
 
-		recipe.image_link ='/img/{}'.format(image_name)
+		recipe.image_link ='/img/{}'.format(name)
 
 	recipe.put()
 
