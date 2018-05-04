@@ -4,14 +4,11 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
   $(document).ready(function(){
-    // TODO: Fix this so we can actually cycle background images
-    return;
-
     var header = $('#header-img');
     var backgrounds = new Array(
-      'static/background3.jpg',
-      'static/background2.jpg',
-      'static/background.jpg'
+      '../static/background3.jpg',
+      '../static/background2.jpg',
+      '../static/background.jpg'
     );
 
     var current = 0;
@@ -28,8 +25,10 @@
     // header.css('background', backgrounds[0]);
   });
 </script>
-<script src="{{ url_for('static', filename='edit.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
+
+{% block nav_create %}<li class="active"><a>Upload Creation</a></li>{% endblock %}
 
 {% block body %}
 <div id="header-img" class="jumbotron">
