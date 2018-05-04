@@ -73,7 +73,8 @@ def about():
 def rate():
 	user = users.get_current_user()
 	if not user:
-		return redirect(users.create_login_url(request.url))
+		#return redirect(users.create_login_url(request.url))
+                return 'Please log in to rate!', 400
 
 	recipe = db.get_recipe(request.form['recipe'])
 	rating = float(request.form['rating'])
