@@ -171,11 +171,13 @@ function rate(recipe, rating) {
         var new_rating = parseFloat(data)
         for (var i = 1; i <= 5; i++) {
             var star_id = recipe + '-star-' + i.toString();
-            var star = $(document.getElementById(star_id));
-            if (i <= new_rating) {
-                star.addClass('checked');
+            var star = document.getElementById(star_id);
+            if (new_rating - (i-1) > 0.25 && new_rating - (i-1) < 0.75)  {
+                star.className = "fa fa-star-half-o checked";
+            } else if (i <= new_rating + 0.25) {
+                star.className = "fa fa-star checked";
             } else {
-                star.removeClass('checked');
+                star.className = "fa fa-star-o checked";
             }
         }
     }).error(function(data) {
