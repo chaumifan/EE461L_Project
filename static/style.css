@@ -319,5 +319,5 @@ form#new-recipe-form input[type=text] {
 .recipes img {
   height: 350px;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
