@@ -31,8 +31,8 @@ def create():
 				return 'Recipe name is not unique! Please change your recipe name.', 400
 		except RequestTooLargeError:
 			return "Image was too large! Please try something below 1 megabyte.", 400
-		except Exception as e:
-			return str(e), 400
+		except Exception:
+			return "Image was too large! Please try something below 1 megabyte.", 400
 	else:
 		return render_template('create.html', user=user)
 
@@ -76,6 +76,8 @@ def edit(recipe_id):
 				return 'Recipe does not exist!', 400
 		except RequestTooLargeError:
 			return "Image was too large! Please try something below 1 megabyte.", 400
+		except Exception:
+			return "Image was too large! Please try something below 1 megabyte.", 400			
 	else:
 		return render_template('edit.html', user=user, recipe=recipe)
 
