@@ -315,3 +315,9 @@ form#new-recipe-form input[type=text] {
   max-height: 130px;
   object-fit: contain;
 }
+
+.recipes img {
+  height: 350px;
+  width: 100%;
+  object-fit: contain;
+}
