@@ -321,3 +321,7 @@ form#new-recipe-form input[type=text] {
   width: 100%;
   object-fit: cover;
 }
+
+.grey-text {
+  color: grey;
+}

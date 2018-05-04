@@ -51,7 +51,8 @@
         <div class="upload panel-body">
           <form id="recipeEditForm" enctype="multipart/form-data" method="post">
             <h3>Recipe Name</h3>
-            <input class="input" placeholder="Example: Pad Thai" id="recipe-name" type="text" name="name" value="{{ recipe.name }}" readonly>
+            <input class="input" placeholder="Example: Pad Thai" type="text" value="{{ recipe.name }}" disabled>
+            <input class="input" id="recipe-name" type="hidden" name="name" value="{{ recipe.name }}">
             <br/>
             <br/>
             <br/>
@@ -69,6 +70,7 @@
             <br/>
 
             <h3>Upload Photo</h3>
+            <h4 class="grey-text">(If you don't select a new photo, the old one will be kept).</h4>
             <input class="input" id="recipe-photo" type="file" name="photo">
             <br/>
             <br/>
