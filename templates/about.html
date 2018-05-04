@@ -44,42 +44,89 @@
 <!-- end about section -->
 
 <div id=grid class=container style="text-align: center">
-  <h2 style="font-weight: bold">About Pocket Recipes</h2>
-  <br>
-    <h4>
-      Have you ever had the problem where you have a full fridge but don't know what to do with all your ingredients?
-      <br>
-      Simply enter in all of the ingredients you want to use and we will curate a list of recipes that fit your fridge.
-      <br>
-      <br>
-    </h4>
-    <p>
-      Created by: Calvin Ly, Evonne Ng, Kevin Chau, Hasan Genc, Matt Tawil
-    </p>  
-    <div class=instr>
-      <br>
-      <h3 style="font-weight: bold">It's as easy as 1, 2, 3!</h3>
-      <br>
-      <h4>1. Enter all ingredients you want to include in the recipes in the TOP box</h4>
-      <h4>2. Enter all ingredients you are allergic to or just don't like in the BOTTOM box</h4>
-      <h4>3. Submit Query!</h4>
+  <div class="col-sm-4">
+    <!-- start of recipe panels -->
+    <div class="panel panel-default recipes">
+      <!-- dummy individual panels -->
+      <div class="panel-heading">About Pocket Recipes</div>
+      <div class="panel-body">
+        <h2 class="panel-title">
+            <h4>Have you ever had the problem where you have a full fridge but don't know what to do with all your ingredients?</h4>
+            <br>
+            <h4>Simply enter in all of the ingredients you want to use and we will curate a list of recipes that fit your fridge.</h4>
+            <br>
+            <h4>We're just a group of students who love food as much as you do. Unfortunately, we were never really good cooks. We needed your help, and so we actually build this site just to help ourselves become better cooks.</h4>
+          </h4>  
+        </h2>
+      </div>
     </div>
-    <br>
-    <div class=instr>
-      <h3>Tools used to create this project</h3>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- start of recipe panels -->
+    <div class="panel panel-default recipes">
+      <!-- dummy individual panels -->
+      <div class="panel-heading">It's as easy as 1, 2, 3!</div>
+      <div class="panel-body instructions">
+        <h2 class="panel-title">
+          <h4>1. Type an ingredient you want included in the your personalized list of recipes in the TOP box. Hit Enter and repeat for all ingredients.</h4>
+          <br>
+          <h4>2. Type an ingredient you are allergic to or just don't like in the BOTTOM box. Hit Enter and repeat for all ingredients</h4>
+          <br>
+          <h4>3. Browse your perfectly curated list of recipes!</h4>
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- start of recipe panels -->
+    <div class="panel panel-default recipes">
+      <!-- dummy individual panels -->
+      <div class="panel-heading">Developer Tools</div>
+      <div class="panel-body">
+        <h2 class="panel-title">
           <h5>Google Cloud SDK written in Python 2.7</h5>
           <h5>Bootstrap and JQuery for HTML, CSS, and Javascript</h5>
           <h5>SQL for database storage and management</h5>
+          <br>
           <h5>Testing</h5>
-          <ul>
-              <h5>Selenium for UI testing</h5>
-              <h5>Controller tests with integration testing (REST)</h5>
-              <h5>Python for database queries (Component and Unit testing)</h5>
-          </ul>
-      <p>Source code can be found <a href=https://github.com/chaumifan/EE461L_Project>here</p>
+          <h5>Selenium for UI testing</h5>
+          <h5>Controller tests with integration testing (REST)</h5>
+          <h5>Python for database queries (Component and Unit testing)</h5>
+          <h5>Source code can be found <a href=https://github.com/chaumifan/EE461L_Project>here</h5></a>
+        </h2>
+      </div>
+    </div>
   </div>
-  </p>
 </div>
-<br>
+<div class="container teamfeed">
+  <h1>Meet the Team</h1>
+  <br>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='calvin.jpg') }}" alt="Card image cap"/>
+    <h3>Calvin Ly</h3>
+  </div>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='evonne.jpg') }}" alt="Card image cap"/>
+    <h3>Evonne Ng</h3>
+  </div>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='background.jpg') }}" alt="Card image cap"/>
+    <h3>Kevin Chau</h3>
+  </div>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='hasan.png') }}" alt="Card image cap"/>
+    <h3>Hasan Genc</h3>
+  </div>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='background.jpg') }}" alt="Card image cap"/>
+    <h3>Matt Tawil</h3>
+  </div>
+  <div class="col-sm-2">
+    <img class="teamimg" src="{{ url_for('static', filename='icon_burned.png') }}" alt="Card image cap"/>
+    <h3>Our users!</h3> 
+  </div>
+</div>
 <!-- end of grid -->
 {% endblock %}

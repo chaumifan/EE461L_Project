@@ -31,6 +31,7 @@
         <ul class="nav navbar-nav">
           {% block nav_browse %}<li><a href="/">Browse Recipes</a></li>{% endblock %}
           {% block nav_create %}<li><a href="{{ url_for('create') }}">Upload Creation</a></li>{% endblock %}
+          {% block nav_uploads  %}<li><a href="{{ url_for('uploads') }}">User Uploads</a></li>{% endblock %}
           {% block nav_about  %}<li><a href="{{ url_for('about') }}">About</a></li>{% endblock %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -50,7 +51,7 @@
     </div>
 
     <footer class="navbar-default">
-      <div class="footer">
+      <div class="footer container">
         <div class="row">
             <h3><a href="https://github.com/chaumifan/EE461L_Project"><i class="fa fa-github"></i></a></h3>
           <p>PocketRecipes&#169;</p>

@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def landing():
-  	user = users.get_current_user()
-  	return render_template('landing.html', user=user)
+	user = users.get_current_user()
+	return render_template('landing.html', user=user)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -33,6 +33,67 @@ def create():
 	else:
 		return render_template('create.html', user=user)
 
+@app.route('/uploads', methods=['GET', 'POST'])
+def uploads():
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+	uploads = db.get_user_uploads(user)
+	uploads_string = render_template('recipes.html', res=uploads, user=user)
+	return render_template('uploads.html', user=user, uploads=uploads_string)
+
+@app.route('/edit/<recipe_id>', methods=['GET', 'POST'])
+def edit(recipe_id):
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+
+	recipe = db.get_recipe(recipe_id)
+	if user.email() != recipe.author:
+		return "You do not own this recipe!", 400
+
+	if request.method == 'POST':
+		name = request.form['name']
+		description = request.form['description']
+		instructions = request.form['instructions']
+		ingred_list = request.form.getlist('ingredients[]')
+
+		if 'photo' in request.files:
+			photo = request.files.get('photo')
+
+			if photo.filename == '':
+				photo = None
+		else:
+			photo = None
+
+		if db.edit_recipe(name, user, description, instructions, photo, ingred_list):
+			return 'OK' #Return value doesn't matter
+		else:
+			return 'Recipe does not exist!', 400
+	else:
+		return render_template('edit.html', user=user, recipe=recipe)
+
+@app.route('/delete/<recipe_id>', methods=['POST'])
+def delete(recipe_id):
+	user = users.get_current_user()
+	if not user:
+		return redirect(users.create_login_url(request.url))
+
+	print("\n\nHere!\n\n")
+
+	recipe = db.get_recipe(recipe_id)
+	if user.email() != recipe.author:
+		return "You do not own this recipe!", 400
+
+	print("\n\nhey!\n\n")
+
+	if db.delete_recipe(recipe_id):
+		print("\n\ngood!\n\n")
+		return "OK"
+	else:
+		print("\n\nerror!\n\n")
+		return "Error when deleting!"
+
 @app.route("/img/<key>")
 def img(key):
 	image = db.get_image(key)
@@ -40,11 +101,13 @@ def img(key):
 
 @app.route('/submit_query', methods=['POST'])
 def submit_query():
+	user = users.get_current_user()
+
 	ingred_list = request.form.getlist('ingredients[]')
 	exclude_list = request.form.getlist('excludes[]')
 	recipes = db.query_ingredients(ingred_list, exclude_list)
-
-	return render_template('recipes.html', res=recipes)
+	recipes = sorted(recipes, key=lambda r: (-r.rating, r.name.lower())) # sort ascending by rating and then name if tied
+	return render_template('recipes.html', res=recipes, user=user)
 
 @app.route('/save_ingredients', methods=['POST'])
 def save_ingredients():

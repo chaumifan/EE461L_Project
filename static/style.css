@@ -55,6 +55,21 @@ body {
   width: 80%;
   margin-top: 75px;
 }
+
+#prev{
+    max-width: 50%;
+    height: 200px;
+    margin-top: 12px;
+}
+
+.pull-left {
+  margin-left: 25px !important;
+}
+
+.goto {
+  margin-right: 25px !important;
+}
+
 .ingred-list {
   width: 100%;
   margin-left: 0px;
@@ -70,6 +85,10 @@ body {
 }
 .remove .btn {
   border: 0px solid transparent;
+}
+
+.include, .exclude {
+  margin-bottom: 15px;
 }
 
 .include .list-group-item {
@@ -104,7 +123,8 @@ body {
 }
 
 .panel-text {
-  font-size: 15px;
+  text-align: center;
+  font-size: 16px;
   margin-top: 10px;
 }
 
@@ -188,7 +208,8 @@ form#new-recipe-form input[type=text] {
   margin: 0 auto;
   box-shadow: 3px 3px 8px darkgrey; /*default grey*/
   font-size: 17px;
-  margin-bottom: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: none;
 }
 
@@ -262,11 +283,41 @@ form#new-recipe-form input[type=text] {
   background-color: white;
   text-align: center;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   overflow: hidden;
 }
 
 .upload {
   padding-left: 40px;
   padding-right: 40px;
+}
+
+#deleteRecipe  {
+  color: red;
+}
+
+.instructions h4{
+  font-size: 20px;
+}
+
+.teamfeed {
+  padding-top: 30px;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.teamfeed h3, h1 {
+  text-align: center;
+}
+
+.teamimg{
+  width: 100%;
+  max-height: 130px;
+  object-fit: contain;
+}
+
+.recipes img {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
 }

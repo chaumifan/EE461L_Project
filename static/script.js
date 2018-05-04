@@ -74,6 +74,18 @@ function removeIngred(ingred) {
     }
 }
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#prev').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 function updateURL(url) {
     if (history.pushState) {
         window.history.pushState({path:url}, '', url);
@@ -138,6 +150,19 @@ function addExcludeOnLandingPage(exclude) {
     }
 }
 
+function clearIngredientAndExclude() {
+    local_ingred_set.clear();
+    local_exclude_set.clear();
+    var ingred_list = document.getElementById('ingred_list');
+    ingred_list.innerHTML = '';
+    var exclude_list = document.getElementById('exclude_list');
+    exclude_list.innerHTML = '';
+    var current_url = window.location.href;
+    if (current_url.indexOf('?') !== -1) {
+        updateURL(current_url.substring(0, current_url.indexOf('?')));
+    }
+}
+
 function rate(recipe, rating) {
     $.post('/rate', {'recipe': recipe, 'rating': rating}, function(data) {
         alert("Recorded! New rating: " + data);
@@ -158,6 +183,15 @@ function rate(recipe, rating) {
     });
 }
 
+function submit_query() {
+  var ingred_list = Array.from(local_ingred_set);
+  var exclude_list = Array.from(local_exclude_set);
+  $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
+    var results = document.getElementById('results');
+    results.innerHTML = data;
+  });
+}
+
 $(function(){
     // Load ingredients and excludes from query string
     loadIngredients();
@@ -170,6 +204,7 @@ $(function(){
         var ingred = ingred_input.val().toLowerCase();
         ingred_input.val('');
         addIngredientOnLandingPage(ingred);
+        submit_query();
     });
 
     $('#addExclude').submit(function(e) {
@@ -178,6 +213,7 @@ $(function(){
         var exclude = exclude_input.val().toLowerCase();
         exclude_input.val('');
         addExcludeOnLandingPage(exclude);
+        submit_query();
     });
 
     $('#ingred_list').on('click', 'span.remove', function (e) {
@@ -186,6 +222,7 @@ $(function(){
         local_ingred_set.delete(ingred);
         include_list.removeChild(this.parentNode);
         updateURL(removeIngred(ingred));
+        submit_query();
     });
 
     $('#exclude_list').on('click', 'span.remove', function (e) {
@@ -194,15 +231,7 @@ $(function(){
         local_exclude_set.delete(ingred);
         exclude_list.removeChild(this.parentNode);
         updateURL(removeIngred(ingred));
-    });
-
-    $('#submitQuery').on('click', function (e) {
-        var ingred_list = Array.from(local_ingred_set);
-        var exclude_list = Array.from(local_exclude_set);
-        $.post('submit_query', {'ingredients[]': ingred_list, 'excludes[]': exclude_list}, function(data) {
-            var results = document.getElementById('results');
-            results.innerHTML = data;
-        });
+        submit_query();
     });
 
     $('#saveQuery').on('click', function (e) {
@@ -216,8 +245,10 @@ $(function(){
     $('#loadQuery').on('click', function (e) {
         $.post("/load_ingredients", function(data) {
             data = $.parseJSON(data);
+            clearIngredientAndExclude();
             data.ingred_list.forEach(addIngredientOnLandingPage);
             data.exclude_list.forEach(addExcludeOnLandingPage);
+            submit_query();
         });
     });
 
@@ -240,7 +271,12 @@ $(function(){
         local_ingred_set.delete(ingred);
         upload_ingred_list.removeChild(this.parentNode);
     });
+  
 
+    $('#recipe-photo').change(function(){
+                            readURL(this);
+    });
+  
     $('#uploadRecipe').on('click', function(e) {
         var name = $('#recipe-name').val()
         var link = $('#recipe-link').val().toLowerCase();
