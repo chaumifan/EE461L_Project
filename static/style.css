@@ -57,9 +57,9 @@ body {
 }
 
 #prev{
-    max-width: 50%;
-    height: 200px;
-    margin-top: 12px;
+  height: 350px;
+  width: 50%;
+  object-fit: cover;
 }
 
 .pull-left {
