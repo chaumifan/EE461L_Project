@@ -9,9 +9,9 @@
             <h2 class="panel-title">
               {% for i in range(1,6) %}
               <span class="fa 
-                {% if ((r.rating - (i-1) > 0.3) and (r.rating - (i-1) < 0.7)) %}
+                {% if (r.rating - (i-1) > 0.3) and (r.rating - (i-1) < 0.7) %}
                   {{'fa-star-half-o'}}
-                {% else if i <= r.rating %}
+                {% elif i <= r.rating %}
                   {{'fa-star'}}
                 {% else %}
                   {{'fa-star-o'}}
@@ -22,57 +22,10 @@
             </h2>
             <p class="panel-text">{{r.description}}</p>
             <p class="panel-text ingred">Ingredients: 
-            {% for ingred in r.ingred_list %}
-              {{ ingred + ',' }}
-            {% endfor %}
+            {{ r.ingred_list|join(", ") }}
             </p>
             <a href="{{r.instructions}}" target="_blank" class="link btn btn-default">Go to recipe</a>
           </div>
         </div>
       </div>
 {% endfor %}
-
-{#
-                {% if (r.rating - (i-1) > 0.3) and (r.rating - (i-1) < 0.7): %}
-                  {{'fa-star-half-o'}}
-                {% else %}
-                  {% if i <= r.rating %}
-                    {{'fa-star'}}
-                  {% else %}
-                  {{'fa-star-o'}}
-                  {% endif %}
-                {% endif %}
-#}
-
-{#
-                {% if i <= r.rating %}
-                  {% if i is not number %}
-                    {{'fa-star-half-o'}}
-                  {% else %}
-                    {{'fa-star'}}
-                  {% endif %}
-                {% else %}
-                  {{'fa-star-o'}}
-                {% endif %}
-#}
-{#
-                {% if i <= r.rating %}
-                  {% if not ((r.rating - (i-1) > 0.25) and (r.rating - (i-1) < 0.75)) %}
-                    {{'fa-star'}}
-                  {% else %}
-                    {{'fa-star-half-o'}}
-                  {% endif %}
-                {% else %}
-                  {{'fa-star-o'}}
-                {% endif %}
-#}
-{#
-                {% if i <= r.rating %}
-                  {{'fa-star'}}
-                {% else %}
-                  {% if ((r.rating - (i-1) > 0.25) and (r.rating - (i-1) < 0.75)) %}
-                    {{'fa-star-half-o'}}
-                  {% else %}
-                  {{'fa-star-o'}}
-                {% endif %}
-#}
