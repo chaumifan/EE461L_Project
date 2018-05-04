@@ -61,37 +61,28 @@ class DatastoreTestCase(unittest.TestCase):
 		include = ['rice', 'water']
 		res = db.query_ingredients(include, list())
 		self.assertEquals(len(res), 1)
-		# TODO: create recipe obj and test equals
 
 	def test_query_multiple(self):
 		include = ['rice', 'potato']
 		res = db.query_ingredients(include, list())
 		self.assertEquals(len(res), 2)
-		# TODO: create recipe obj and test equals
 
 	def test_query_duplicate(self):
 		include = ['oil']
 		res = db.query_ingredients(include, list())
 		self.assertEquals(len(res), 2)
-		# TODO:create recipe obj and test equals
 
 	def test_query_exclude(self):
 		include = ['oil']
 		exclude = ['potato']
 		res = db.query_ingredients(include, exclude)
 		self.assertEquals(len(res), 1)
-		# TODO:create recipe obj and test equals
 
 	def test_query_all_exclude(self):
 		include = ['oil']
 		exclude = ['potato', 'veggies', 'salt']
 		res = db.query_ingredients(include, exclude)
 		self.assertEquals(len(res), 0)
-		# TODO:create recipe obj and test equals
-
-	###############
-	# TEST CREATE #
-	###############
 
 if __name__ == '__main__':
 	unittest.main()
