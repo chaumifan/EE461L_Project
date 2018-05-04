@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, Response
 from werkzeug.http import parse_options_header
 from google.appengine.api import users
+from google.appengine.runtime.apiproxy_errors import RequestTooLargeError
 import database as db
 import json, sys, os
 
@@ -28,6 +29,8 @@ def create():
 				return 'OK' #Return value doesn't matter
 			else:
 				return 'Recipe name is not unique! Please change your recipe name.', 400
+		except RequestTooLargeError:
+			return "Image was too large! Please try something below 1 megabyte.", 400
 		except Exception as e:
 			return str(e), 400
 	else:
@@ -53,23 +56,26 @@ def edit(recipe_id):
 		return "You do not own this recipe!", 400
 
 	if request.method == 'POST':
-		name = request.form['name']
-		description = request.form['description']
-		instructions = request.form['instructions']
-		ingred_list = request.form.getlist('ingredients[]')
+		try:
+			name = request.form['name']
+			description = request.form['description']
+			instructions = request.form['instructions']
+			ingred_list = request.form.getlist('ingredients[]')
 
-		if 'photo' in request.files:
-			photo = request.files.get('photo')
+			if 'photo' in request.files:
+				photo = request.files.get('photo')
 
-			if photo.filename == '':
+				if photo.filename == '':
+					photo = None
+			else:
 				photo = None
-		else:
-			photo = None
 
-		if db.edit_recipe(name, user, description, instructions, photo, ingred_list):
-			return 'OK' #Return value doesn't matter
-		else:
-			return 'Recipe does not exist!', 400
+			if db.edit_recipe(name, user, description, instructions, photo, ingred_list):
+				return 'OK' #Return value doesn't matter
+			else:
+				return 'Recipe does not exist!', 400
+		except RequestTooLargeError:
+			return "Image was too large! Please try something below 1 megabyte.", 400
 	else:
 		return render_template('edit.html', user=user, recipe=recipe)
 
