@@ -108,3 +108,26 @@ class ControllerTest(unittest.TestCase):
 		self.assertEquals(result.status_code, 200)
 		self.assertEquals(result.get_data(), '{"exclude_list": ["lettuce", "tomato"], "ingred_list": ["burger", "buns"]}')
 	
+	def testPostTwice(self):
+		self.loginUser()
+
+		# Post recipe once
+		result = self.app.post('/create', data = {
+				'name' : 'Hamburger',
+				'description' : 'The American Dream',
+				'instructions' : 'https://hamburger.com',
+				'image_link' : 'www.google.com',
+				'ingredients[]' : ['burger', 'buns']
+			})
+		self.assertEquals(result.status_code, 200)
+
+		# Try to post it again
+		result = self.app.post('/create', data = {
+				'name' : 'Hamburger',
+				'description' : 'The American Dream',
+				'instructions' : 'https://hamburger.com',
+				'image_link' : 'www.google.com',
+				'ingredients[]' : ['burger', 'buns']
+			})
+		self.assertEquals(result.status_code, 302)
+		self.assertEquals(len(db.query_ingredients(['burger', 'buns'], [])), 1)
